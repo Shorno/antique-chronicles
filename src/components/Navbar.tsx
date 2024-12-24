@@ -1,21 +1,22 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {Link} from "react-router";
 import {useState} from "react";
-import {ChevronRight, Menu, X} from "lucide-react";
+import {ChevronRight, Menu, Search, X} from "lucide-react";
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
+import {Input} from "@/components/ui/input.tsx";
 
 const navLinks = [
     {title: 'Home', href: '/'},
     {title: 'All Artifacts', href: '/all-artifacts'},
+    {title: 'Add Artifacts', href: '/add-artifacts'},
 ]
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(isOpen)
-
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
 
     return (
-        <div className={"bg-black p-8"}>
+        <div className={"bg-primaryBlack p-8 w-full"}>
             <nav className="mx-auto container text-white flex justify-between items-center">
                 <Link to={"/"} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>
@@ -23,6 +24,9 @@ export default function Navbar() {
                         <span>Chronicles</span>
                     </div>
                 </Link>
+                <div className={"hidden md:block"}>
+                    <Input placeholder={"Search"} className={"w-96"}/>
+                </div>
                 <div className="hidden lg:flex items-center space-x-8 font-semibold">
                     {navLinks.map((link) => (
                         <AnimatedNavLink
@@ -33,31 +37,68 @@ export default function Navbar() {
                         </AnimatedNavLink>
                     ))}
                 </div>
-                <motion.div className="lg:hidden relative w-8 h-8">
-                    <AnimatePresence mode="wait">
-                        {isOpen ? (
-                            <motion.div
-                                key="close"
-                                initial={{opacity: 0, rotate: -90}}
-                                animate={{opacity: 1, rotate: 0}}
-                                exit={{opacity: 0, rotate: 90}}
-                                transition={{duration: 0.5, ease: "easeInOut"}}
-                            >
-                                <X
-                                    onClick={() => setIsOpen(false)}
-                                />
-                            </motion.div>
-                        ) : (
-                            <motion.div
-                                key="menu"
-                                transition={{duration: 0.5, ease: "easeInOut"}}
-                            >
-                                <Menu
-                                    onClick={() => setIsOpen(true)}
-                                />
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
+                <motion.div className="lg:hidden relative">
+                    <div className={"flex gap-8"}>
+                        <div>
+                            {
+                                !isSearchOpen && <Search onClick={() => setIsSearchOpen(!isSearchOpen)}/>
+
+                            }
+                            {isSearchOpen && (
+                                <motion.div
+                                    initial={{opacity: 0}}
+                                    animate={{opacity: 1}}
+                                    exit={{opacity: 0}}
+                                    transition={{duration: 0.2}}
+                                    className="lg:hidden fixed inset-0 h-20 bg-black mt-32"
+                                >
+                                    <motion.div
+                                        className="flex flex-col justify-center items-center h-full"
+                                        initial="closed"
+                                        animate="open"
+                                        exit="closed"
+                                        variants={{
+                                            open: {
+                                                transition: {staggerChildren: 0.07, delayChildren: 0.2}
+                                            },
+                                            closed: {
+                                                transition: {staggerChildren: 0.05, staggerDirection: -1}
+                                            }
+                                        }}
+                                    >
+                                        <div className={"w-full flex justify-center items-center gap-4"}>
+                                            <Input placeholder={"Search"} className={"w-4/5 "}/>
+                                            <Search onClick={() => setIsSearchOpen(!isSearchOpen)}/>
+                                        </div>
+                                    </motion.div>
+                                </motion.div>
+                            )}
+                        </div>
+                        <AnimatePresence mode="wait">
+                            {isOpen ? (
+                                <motion.div
+                                    key="close"
+                                    initial={{opacity: 0, rotate: -90}}
+                                    animate={{opacity: 1, rotate: 0}}
+                                    exit={{opacity: 0, rotate: 90}}
+                                    transition={{duration: 0.5, ease: "easeInOut"}}
+                                >
+                                    <X
+                                        onClick={() => setIsOpen(false)}
+                                    />
+                                </motion.div>
+                            ) : (
+                                <motion.div
+                                    key="menu"
+                                    transition={{duration: 0.5, ease: "easeInOut"}}
+                                >
+                                    <Menu
+                                        onClick={() => setIsOpen(true)}
+                                    />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
                 </motion.div>
                 <AnimatePresence>
                     {isOpen && (
