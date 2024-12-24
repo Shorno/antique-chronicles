@@ -1,6 +1,6 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {Link} from "react-router";
-import {useEffect, useState} from "react";
+import {FormEvent, useEffect, useState} from "react";
 import {ChevronRight, Menu, Search, X} from 'lucide-react';
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
@@ -14,6 +14,8 @@ const navLinks = [
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
+
 
     useEffect(() => {
         if (isOpen) {
@@ -23,6 +25,10 @@ export default function Navbar() {
         }
     }, [isOpen]);
 
+    const handleSearchSubmit = (e: FormEvent) => {
+        e.preventDefault();
+        console.log("Search submitted:", searchQuery);
+    };
 
 
     return (
@@ -35,7 +41,14 @@ export default function Navbar() {
                     </div>
                 </Link>
                 <div className={"hidden md:block"}>
-                    <Input placeholder={"Search"} className={"w-96"}/>
+                    <form onSubmit={handleSearchSubmit}>
+                        <Input
+                            placeholder={"Search"}
+                            className={"w-96"}
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                        />
+                    </form>
                 </div>
                 <div className="hidden lg:flex items-center space-x-8 font-semibold">
                     {navLinks.map((link) => (
@@ -67,8 +80,20 @@ export default function Navbar() {
                                             <X size={20} onClick={() => setIsSearchOpen(false)}/>
                                         </div>
                                         <div className={"flex gap-4 items-center"}>
-                                            <Input placeholder="Search" className="flex-grow relative"/>
-                                            <Search size={30}/>
+                                            {/*<Input placeholder="Search" className="flex-grow relative"/>*/}
+                                            {/*<Search size={30}/>*/}
+                                            <form onSubmit={handleSearchSubmit}
+                                                  className={"flex w-full gap-4 items-center"}>
+                                                <Input
+                                                    placeholder="Search"
+                                                    className="flex-grow relative"
+                                                    value={searchQuery}
+                                                    onChange={(e) => setSearchQuery(e.target.value)}
+                                                />
+                                                <button type="submit">
+                                                    <Search size={30}/>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </motion.div>
