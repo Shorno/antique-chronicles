@@ -1,7 +1,7 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {Link} from "react-router";
-import {useState} from "react";
-import {ChevronRight, Menu, Search, X} from "lucide-react";
+import {useEffect, useState} from "react";
+import {ChevronRight, Menu, Search, X} from 'lucide-react';
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
@@ -15,8 +15,18 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
 
+    useEffect(() => {
+        if (isOpen) {
+            document.body.classList.add('overflow-hidden');
+        } else {
+            document.body.classList.remove('overflow-hidden');
+        }
+    }, [isOpen]);
+
+
+
     return (
-        <div className={"bg-primaryBlack p-8 w-full"}>
+        <div className={`bg-primaryBlack p-4 md:p-8 w-full top-0`}>
             <nav className="mx-auto container text-white flex justify-between items-center">
                 <Link to={"/"} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>
@@ -41,36 +51,26 @@ export default function Navbar() {
                     <div className={"flex gap-8"}>
                         <div>
                             {
-                                !isSearchOpen && <Search onClick={() => setIsSearchOpen(!isSearchOpen)}/>
-
+                                !isSearchOpen && <Search onClick={() => setIsSearchOpen(true)}/>
                             }
                             {isSearchOpen && (
                                 <motion.div
-                                    initial={{opacity: 0}}
-                                    animate={{opacity: 1}}
-                                    exit={{opacity: 0}}
+                                    initial={{opacity: 0, y: -20}}
+                                    animate={{opacity: 1, y: 0}}
+                                    exit={{opacity: 0, y: -20}}
                                     transition={{duration: 0.2}}
-                                    className="lg:hidden fixed inset-0 h-20 bg-black mt-32"
+                                    className="lg:hidden fixed  top-0 left-0  right-0 bg-primaryBlack p-4 z-50"
                                 >
-                                    <motion.div
-                                        className="flex flex-col justify-center items-center h-full"
-                                        initial="closed"
-                                        animate="open"
-                                        exit="closed"
-                                        variants={{
-                                            open: {
-                                                transition: {staggerChildren: 0.07, delayChildren: 0.2}
-                                            },
-                                            closed: {
-                                                transition: {staggerChildren: 0.05, staggerDirection: -1}
-                                            }
-                                        }}
-                                    >
-                                        <div className={"w-full flex justify-center items-center gap-4"}>
-                                            <Input placeholder={"Search"} className={"w-4/5 "}/>
-                                            <Search onClick={() => setIsSearchOpen(!isSearchOpen)}/>
+                                    <div className="flex flex-col gap-2">
+                                        <div className={"flex justify-between items-center"}>
+                                            <h1 className={"text-lg"}>Search Through History</h1>
+                                            <X size={20} onClick={() => setIsSearchOpen(false)}/>
                                         </div>
-                                    </motion.div>
+                                        <div className={"flex gap-4 items-center"}>
+                                            <Input placeholder="Search" className="flex-grow relative"/>
+                                            <Search size={30}/>
+                                        </div>
+                                    </div>
                                 </motion.div>
                             )}
                         </div>
@@ -107,7 +107,7 @@ export default function Navbar() {
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             transition={{duration: 0.2}}
-                            className="lg:hidden fixed inset-0 bg-black mt-28"
+                            className="lg:hidden fixed inset-0 bg-primaryBlack mt-24"
                         >
                             <motion.div
                                 className="flex flex-col h-full pt-16"
