@@ -5,15 +5,9 @@ import {Link} from "react-router";
 import {Button} from "@/components/ui/button.tsx";
 import {LogOut} from "lucide-react";
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
+import {User} from "firebase/auth";
 
-type CurrentUser = {
-    displayName: string | null;
-    photoURL: string | null;
-}
-type AuthContent = {
-    currentUser: CurrentUser;
-    logout: () => void;
-}
+
 
 export default function UserProfile() {
     const {currentUser, authLoading, logout} = useAuthStore();
@@ -33,8 +27,8 @@ export default function UserProfile() {
                                 <Tooltip>
                                     <TooltipTrigger>
                                         <Avatar>
-                                            <AvatarImage src={currentUser?.photoURL}
-                                                         alt={currentUser?.displayName}/>
+                                            <AvatarImage src={currentUser.photoURL || undefined}
+                                                         alt={currentUser.displayName || undefined}/>
                                             <AvatarFallback className={"text-black"}>
                                                 {currentUser?.displayName?.charAt(0).toUpperCase()}
                                             </AvatarFallback>
@@ -68,13 +62,18 @@ export default function UserProfile() {
     )
 }
 
+type AuthContent = {
+    currentUser: User;
+    logout: () => void;
+}
+
 const AuthContent = ({currentUser, logout}: AuthContent) => {
     return (
         <div className="flex flex-col gap-4 p-2 bg-primaryBlack text-white">
             <div className="flex items-center gap-4">
                 <Avatar>
-                    <AvatarImage src={currentUser?.photoURL}
-                                 alt={currentUser?.displayName}/>
+                    <AvatarImage src={currentUser.photoURL || undefined}
+                                 alt={currentUser.displayName || undefined}/>
                     <AvatarFallback className={"text-black"}>
                         {currentUser?.displayName?.charAt(0).toUpperCase()}
                     </AvatarFallback>
