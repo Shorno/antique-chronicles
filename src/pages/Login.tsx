@@ -8,20 +8,35 @@ import {Link} from "react-router";
 import {loginSchema} from "@/lib/schema.ts";
 import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
+import useAuthStore from "@/store/authStore.ts";
 
 type FormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
+    const {login} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(loginSchema)
     });
 
+
     const onSubmit = async (formData: FormData) => {
-        setIsLoading(true);
-        console.log(formData);
-        toast.success('Login successful');
-        setIsLoading(false);
+        const {email, password} = formData;
+        try {
+            setIsLoading(true);
+            await login(email, password);
+            toast.success('Login successful');
+        } catch (error: any) {
+            switch (error.code) {
+                case 'auth/invalid-credential':
+                    toast.error('Invalid Credentials. Please try again');
+                    break;
+                default:
+                    toast.error('Failed to login: ' + error.message);
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (

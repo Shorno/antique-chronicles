@@ -1,36 +1,54 @@
-import { z } from "zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input.tsx";
-import { Button } from "@/components/ui/button.tsx";
-import { Link } from "react-router";
-import { registrationSchema } from "@/lib/schema.ts";
+import {z} from "zod";
+import {useState} from "react";
+import {useForm} from "react-hook-form";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {Input} from "@/components/ui/input.tsx";
+import {Button} from "@/components/ui/button.tsx";
+import {Link, useNavigate} from "react-router";
+import {registrationSchema} from "@/lib/schema.ts";
 import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
+import useAuthStore from "@/store/authStore.ts";
 
 type FormData = z.infer<typeof registrationSchema>;
 
 export default function Register() {
+    const {signUp} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
-    const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
+    const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(registrationSchema)
     });
+    const navigate = useNavigate();
+
 
     const onSubmit = async (formData: FormData) => {
-        setIsLoading(true);
-        console.log(formData);
-        toast.success('Registration successful');
-        setIsLoading(false);
+        const {displayName, email, photoURL, password} = formData;
+        try {
+            setIsLoading(true);
+            await signUp(email, password, displayName, photoURL);
+            toast.success('Registration successful');
+            navigate('/login');
+        } catch (error: any) {
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    toast.error('Email is already in use');
+                    break;
+                default:
+                    toast.error(`Registration failed ${error.message}`);
+                    break;
+            }
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
         <AuthLayout title={"Register to explore more on"}>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white">Name</label>
-                    <Input id="name" {...register('name')} className="mt-1 bg-white"/>
-                    {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+                    <label htmlFor="displayName" className="block text-sm font-medium text-white">Name</label>
+                    <Input id="displayName" {...register('displayName')} className="mt-1 bg-white"/>
+                    {errors.displayName && <p className="mt-1 text-xs text-red-600">{errors.displayName.message}</p>}
                 </div>
                 <div>
                     <label htmlFor="email" className="block text-sm font-medium text-white">Email</label>
