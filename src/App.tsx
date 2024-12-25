@@ -5,6 +5,7 @@ import AllArtifacts from "@/pages/AllArtifacts.tsx";
 import AddArtifacts from "@/pages/AddArtifacts.tsx";
 import Register from "@/pages/Register.tsx";
 import {Toaster} from "react-hot-toast";
+import Login from "@/pages/Login.tsx";
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
                         <Route path="/" element={<Home/>}/>
                         <Route path="/all-artifacts" element={<AllArtifacts/>}/>
                         <Route path="/add-artifacts" element={<AddArtifacts/>}/>
-                        <Route path="/registration" element={<Register/>}/>
+                        <Route path="/register" element={<Register/>}/>
+                        <Route path="/login" element={<Login/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>
