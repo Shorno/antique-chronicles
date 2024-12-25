@@ -5,6 +5,7 @@ import {ChevronRight, Menu, Search, X} from 'lucide-react';
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
+import UserProfile from "@/components/UserProfile.tsx";
 
 const navLinks = [
     {title: 'Home', href: '/'},
@@ -58,7 +59,9 @@ export default function Navbar() {
                         >
                             {link.title}
                         </AnimatedNavLink>
+
                     ))}
+                    <UserProfile/>
                 </div>
                 <motion.div className="lg:hidden relative">
                     <div className={"flex gap-8"}>
