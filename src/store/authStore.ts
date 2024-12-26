@@ -3,7 +3,6 @@ import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     signInWithPopup,
-    onAuthStateChanged,
     signOut,
     signInWithEmailAndPassword,
     updateProfile,
@@ -50,6 +49,7 @@ const useAuthStore = create<AuthStore>((set) => ({
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
+            useAuthStore.getState().setCurrentUser(result.user);
             return result.user;
         } catch (error) {
             console.error(error);
@@ -60,6 +60,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     logout: async () => {
         try {
             await signOut(auth);
+            useAuthStore.getState().setCurrentUser(null);
         } catch (error) {
             console.error(error);
             throw error;
@@ -68,7 +69,9 @@ const useAuthStore = create<AuthStore>((set) => ({
 
     login: async (email: string, password: string) => {
         try {
-            return await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            useAuthStore.getState().setCurrentUser(userCredential.user);
+            return userCredential;
         } catch (error) {
             console.error(error);
             throw error;
@@ -76,14 +79,8 @@ const useAuthStore = create<AuthStore>((set) => ({
     },
 }))
 
-onAuthStateChanged(auth, (user: User | null) => {
-        useAuthStore.getState().setCurrentUser(user);
-        useAuthStore.getState().setAuthLoading(false);
-    },
-    (error: Error) => {
-        console.error("Auth state change error:", error);
-        useAuthStore.getState().setAuthLoading(false);
-    }
-);
+
+useAuthStore.getState().setAuthLoading(false);
+
 
 export default useAuthStore;
