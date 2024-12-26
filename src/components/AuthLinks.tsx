@@ -3,14 +3,14 @@ import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 import {Link} from "react-router";
 import {Button} from "@/components/ui/button.tsx";
-import {LogOut} from "lucide-react";
+import {LogOut, UserIcon} from "lucide-react";
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {User} from "firebase/auth";
 
 
-
-export default function UserProfile() {
+export default function AuthLinks() {
     const {currentUser, authLoading, logout} = useAuthStore();
+
 
     return (
         <>
@@ -18,6 +18,7 @@ export default function UserProfile() {
                 authLoading ? (
                         <Avatar>
                             <AvatarFallback className={"bg-gray-700"}>
+                                <UserIcon/>
                             </AvatarFallback>
                         </Avatar>
                     )
@@ -29,8 +30,10 @@ export default function UserProfile() {
                                         <Avatar>
                                             <AvatarImage src={currentUser.photoURL || undefined}
                                                          alt={currentUser.displayName || undefined}/>
-                                            <AvatarFallback className={"text-black"}>
-                                                {currentUser?.displayName?.charAt(0).toUpperCase()}
+                                            <AvatarFallback>
+                                                <AvatarFallback className={"bg-gray-700"}>
+                                                    <UserIcon/>
+                                                </AvatarFallback>
                                             </AvatarFallback>
                                         </Avatar>
                                     </TooltipTrigger>
@@ -67,7 +70,7 @@ type AuthContent = {
     logout: () => void;
 }
 
-const AuthContent = ({currentUser, logout}: AuthContent) => {
+export const AuthContent = ({currentUser, logout}: AuthContent) => {
     return (
         <div className="flex flex-col gap-4 p-2 bg-primaryBlack text-white">
             <div className="flex items-center gap-4">

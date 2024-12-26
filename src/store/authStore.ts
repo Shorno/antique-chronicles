@@ -2,9 +2,10 @@ import {create} from 'zustand'
 import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-    signInWithEmailAndPassword,
     updateProfile,
     User,
     UserCredential
@@ -18,6 +19,7 @@ type AuthState = {
     signInWithGoogle: () => Promise<User>;
     logout: () => Promise<void>;
     login: (email: string, password: string) => Promise<UserCredential>;
+
 }
 
 type AuthStore = AuthState & {
@@ -37,7 +39,14 @@ const useAuthStore = create<AuthStore>((set) => ({
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             console.log(userCredential.user);
             const user = userCredential.user;
-            await updateProfile(user, {displayName, photoURL});
+            if (displayName || photoURL) {
+                await updateProfile(user, {displayName, photoURL});
+                const updatedUser = auth.currentUser;
+                if (updatedUser) {
+                    set({currentUser: updatedUser});
+                }
+            }
+            await userCredential.user.reload()
             return userCredential;
         } catch (error) {
             console.error(error);
@@ -49,7 +58,6 @@ const useAuthStore = create<AuthStore>((set) => ({
         try {
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
-            useAuthStore.getState().setCurrentUser(result.user);
             return result.user;
         } catch (error) {
             console.error(error);
@@ -60,7 +68,6 @@ const useAuthStore = create<AuthStore>((set) => ({
     logout: async () => {
         try {
             await signOut(auth);
-            useAuthStore.getState().setCurrentUser(null);
         } catch (error) {
             console.error(error);
             throw error;
@@ -69,9 +76,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 
     login: async (email: string, password: string) => {
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            useAuthStore.getState().setCurrentUser(userCredential.user);
-            return userCredential;
+            return await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             console.error(error);
             throw error;
@@ -79,8 +84,15 @@ const useAuthStore = create<AuthStore>((set) => ({
     },
 }))
 
-
-useAuthStore.getState().setAuthLoading(false);
+onAuthStateChanged(auth, (user: User | null) => {
+        useAuthStore.getState().setCurrentUser(user);
+        useAuthStore.getState().setAuthLoading(false);
+    },
+    (error: Error) => {
+        console.error("Auth state change error:", error);
+        useAuthStore.getState().setAuthLoading(false);
+    }
+);
 
 
 export default useAuthStore;

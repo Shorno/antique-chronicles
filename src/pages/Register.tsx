@@ -27,7 +27,8 @@ export default function Register() {
             setIsLoading(true);
             await signUp(email, password, displayName, photoURL);
             toast.success('Registration successful');
-            navigate('/login');
+
+            navigate('/');
         } catch (error: any) {
             switch (error.code) {
                 case 'auth/email-already-in-use':

@@ -1,11 +1,14 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {Link} from "react-router";
 import {FormEvent, useEffect, useState} from "react";
-import {ChevronRight, Menu, Search, X} from 'lucide-react';
+import {ChevronRight, Menu, Search, UserIcon, X} from 'lucide-react';
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
 import {Input} from "@/components/ui/input.tsx";
-import UserProfile from "@/components/UserProfile.tsx";
+import AuthLinks, {AuthContent} from "@/components/AuthLinks.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
+import useAuthStore from "@/store/authStore.ts";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.tsx";
 
 const navLinks = [
     {title: 'Home', href: '/'},
@@ -13,6 +16,8 @@ const navLinks = [
     {title: 'Add Artifacts', href: '/add-artifacts'},
 ]
 export default function Navbar() {
+    const {authLoading, currentUser, logout} = useAuthStore();
+
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
@@ -61,10 +66,10 @@ export default function Navbar() {
                         </AnimatedNavLink>
 
                     ))}
-                    <UserProfile/>
+                    <AuthLinks/>
                 </div>
-                <motion.div className="lg:hidden relative">
-                    <div className={"flex gap-8"}>
+                <motion.div className="lg:hidden  relative">
+                    <div className={"flex gap-8 justify-center items-center"}>
                         <div>
                             {
                                 !isSearchOpen && <Search onClick={() => setIsSearchOpen(true)}/>
@@ -83,8 +88,6 @@ export default function Navbar() {
                                             <X size={20} onClick={() => setIsSearchOpen(false)}/>
                                         </div>
                                         <div className={"flex gap-4 items-center"}>
-                                            {/*<Input placeholder="Search" className="flex-grow relative"/>*/}
-                                            {/*<Search size={30}/>*/}
                                             <form onSubmit={handleSearchSubmit}
                                                   className={"flex w-full gap-4 items-center"}>
                                                 <Input
@@ -102,6 +105,31 @@ export default function Navbar() {
                                 </motion.div>
                             )}
                         </div>
+                        {authLoading ?
+                            (<Avatar className={"size-8"}>
+                                <AvatarFallback className={"bg-gray-700"}>
+                                    <UserIcon/>
+                                </AvatarFallback>
+                            </Avatar>)
+                            : currentUser && (
+                            <Popover>
+                                <PopoverTrigger>
+                                    <Avatar className={"size-8"}>
+                                        <AvatarImage src={currentUser?.photoURL || undefined}
+                                                     alt={currentUser?.displayName || undefined}/>
+                                        <AvatarFallback>
+                                            <AvatarFallback className={"bg-gray-700"}>
+                                                <UserIcon/>
+                                            </AvatarFallback>
+                                        </AvatarFallback>
+                                    </Avatar>
+                                </PopoverTrigger>
+                                <PopoverContent className={"p-0 border-none w-max"}>
+                                    <AuthContent currentUser={currentUser!} logout={logout}/>
+                                </PopoverContent>
+                            </Popover>
+                        )
+                        }
                         <AnimatePresence mode="wait">
                             {isOpen ? (
                                 <motion.div
@@ -135,7 +163,7 @@ export default function Navbar() {
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             transition={{duration: 0.2}}
-                            className="lg:hidden fixed inset-0 bg-primaryBlack mt-24"
+                            className="lg:hidden fixed inset-0 bg-primaryBlack mt-24 z-[60]"
                         >
                             <motion.div
                                 className="flex flex-col h-full pt-16"
@@ -205,11 +233,38 @@ export default function Navbar() {
                                         }
                                     }}
                                 >
-                                    <Button
-                                        className={"w-full bg-destructive hover:text-destructive transition duration-200"}
-                                    >
-                                        <span className="text-lg">Sign Out</span>
-                                    </Button>
+                                    {
+                                        currentUser ?
+                                            <Button
+                                                onClick={logout}
+                                                className={"w-full bg-destructive hover:text-destructive transition duration-200"}
+                                            >
+                                                <span className="text-lg">Sign Out</span>
+
+                                            </Button>
+                                            :
+                                            (
+
+                                                <div className={"flex w-full gap-8"} onClick={() => setIsOpen(false)}>
+                                                    <Link to={"/login"} className={"w-full"}>
+                                                        <Button
+                                                            className={"w-full bg-amber-600 hover:bg-amber-700"}
+                                                        >
+                                                            <span className="text-lg">Login</span>
+                                                        </Button>
+                                                    </Link>
+                                                    <Link to={"/register"} className={"w-full"}>
+                                                        <Button
+                                                            className={"w-full bg-amber-600 hover:bg-amber-700"}
+                                                        >
+                                                            <span className="text-lg">Sign Up</span>
+                                                        </Button>
+                                                    </Link>
+                                                </div>
+
+                                            )
+                                    }
+
                                 </motion.div>
                             </motion.div>
                         </motion.div>
