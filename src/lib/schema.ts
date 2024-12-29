@@ -15,3 +15,14 @@ export const loginSchema = z.object({
     email: z.string().nonempty('Email is required').email('Invalid email address'),
     password: z.string().nonempty('Password is required')
 })
+
+export const artifactSchema = z.object({
+    name: z.string().min(1, "Artifact name is required"),
+    imageUrl: z.string().url("Invalid image URL"),
+    type: z.enum(["Sculptures", "Tools", "Weapons", "Documents", "Writings", "Other"]),
+    historicalContext: z.string().min(1, "Historical context is required"),
+    createdAt: z.string().min(1, "Creation date is required"),
+    discoveredAt: z.string().min(1, "Discovery date is required"),
+    discoveredBy: z.string().min(1, "Discoverer is required"),
+    presentLocation: z.string().min(1, "Present location is required"),
+});

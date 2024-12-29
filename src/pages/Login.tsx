@@ -4,7 +4,7 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {Link} from "react-router";
+import {Link, useNavigate} from "react-router";
 import {loginSchema} from "@/lib/schema.ts";
 import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
@@ -18,6 +18,7 @@ export default function Login() {
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(loginSchema)
     });
+    const navigate = useNavigate();
 
 
     const onSubmit = async (formData: FormData) => {
@@ -26,6 +27,7 @@ export default function Login() {
             setIsLoading(true);
             await login(email, password);
             toast.success('Login successful');
+            navigate('/');
         } catch (error: any) {
             switch (error.code) {
                 case 'auth/invalid-credential':
