@@ -1,6 +1,7 @@
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import {useNavigate} from "react-router";
+import {slugify} from "@/lib/slugify.ts";
 
 interface ArtifactCardProps {
     id: string;
@@ -10,7 +11,7 @@ interface ArtifactCardProps {
     createdAt: string;
 }
 
-export function ArtifactCard({ id, name, imageUrl, type, createdAt }: ArtifactCardProps) {
+export function ArtifactCard({name, imageUrl, type, createdAt }: ArtifactCardProps) {
     const navigate = useNavigate();
 
     return (
@@ -28,8 +29,8 @@ export function ArtifactCard({ id, name, imageUrl, type, createdAt }: ArtifactCa
                 <p className="text-sm text-gray-600">Created: {createdAt}</p>
             </CardContent>
             <CardFooter className="bg-gray-200 border-t border-gray-300 p-4">
-                <Button
-                    onClick={() => navigate(`/artifact/${id}`)}
+                <Button variant={"link"}
+                        onClick={() => navigate(`/artifacts/${slugify(name)}`, {state: {name}})}
                     className="w-full bg-gray-800 hover:bg-gray-900 text-white"
                 >
                     View Detail

@@ -8,7 +8,7 @@ import {toast} from "react-hot-toast";
 import {artifactSchema} from "@/lib/schema.ts";
 import {z} from "zod";
 import {Textarea} from "@/components/ui/textarea.tsx";
-import {useMutation} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {addArtifacts} from "@/lib/api.ts";
 import useAuthStore from "@/store/authStore.ts";
 
@@ -21,13 +21,14 @@ export default function AddArtifact() {
     const {register, handleSubmit, formState: {errors}, control} = useForm<FormData>({
         resolver: zodResolver(artifactSchema)
     });
-
+    const queryClient = useQueryClient();
 
     const mutation = useMutation({
         mutationFn: addArtifacts,
         onSuccess: (data) => {
             console.log("Artifact added successfully", data);
             toast.success('Artifact added successfully');
+            queryClient.invalidateQueries({queryKey : ["artifacts"], refetchType: "active"});
         },
         onError: (error: unknown) => {
             console.error("Error adding artifact:", error);

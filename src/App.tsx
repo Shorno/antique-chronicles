@@ -7,6 +7,7 @@ import Register from "@/pages/Register.tsx";
 import {Toaster} from "react-hot-toast";
 import Login from "@/pages/Login.tsx";
 import ProtectedRoutes from "@/layout/ProtectedRoutes.tsx";
+import ArtifactDetails from "@/pages/ArtifactDetails.tsx";
 
 function App() {
 
@@ -17,9 +18,10 @@ function App() {
                 <Routes>
                     <Route element={<MainLayout/>}>
                         <Route path="/" element={<Home/>}/>
-                        <Route path="/all-artifacts" element={<AllArtifacts/>}/>
+                        <Route path="/artifacts" element={<AllArtifacts/>}/>
                         <Route element={<ProtectedRoutes/>}>
                             <Route path="/add-artifacts" element={<AddArtifacts/>}/>
+                            <Route path="/artifacts/:artifactName" element={<ArtifactDetails/>}/>
                         </Route>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>

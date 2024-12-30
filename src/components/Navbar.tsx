@@ -12,7 +12,7 @@ import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.t
 
 const navLinks = [
     {title: 'Home', href: '/'},
-    {title: 'All Artifacts', href: '/all-artifacts'},
+    {title: 'All Artifacts', href: '/artifacts'},
     {title: 'Add Artifacts', href: '/add-artifacts'},
 ]
 export default function Navbar() {

@@ -28,7 +28,7 @@ export default function ArtifactGrid() {
         <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {artifactsData.map((artifact: any) => (
-                    <ArtifactCard key={artifact.id} {...artifact} />
+                    <ArtifactCard key={artifact._id} {...artifact} />
                 ))}
             </div>
 

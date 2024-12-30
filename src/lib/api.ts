@@ -13,3 +13,8 @@ export const fetchArtifacts = async () => {
     const response = await axiosInstance.get("/artifacts");
     return response.data;
 }
+
+export const fetchArtifactByName = async (artifactName: string) => {
+    const response = await axiosInstance.get(`/artifacts/${artifactName}`);
+    return response.data;
+}
