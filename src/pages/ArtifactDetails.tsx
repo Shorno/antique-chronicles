@@ -33,6 +33,7 @@ export default function ArtifactDetails() {
     const {currentUser} = useAuthStore();
     const queryClient = useQueryClient();
     const originalName = deSlugify(artifactName || "");
+    //fix like status
 
     const {data: artifactDetails, isLoading, isError, isFetchedAfterMount} = useQuery<ArtifactDetails>({
         queryKey: ["artifactDetails", originalName],
