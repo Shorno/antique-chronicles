@@ -14,6 +14,7 @@ const navLinks = [
     {title: 'Home', href: '/'},
     {title: 'All Artifacts', href: '/artifacts'},
     {title: 'Add Artifacts', href: '/add-artifacts'},
+    {title: 'My Artifacts', href: '/my-artifacts'},
 ]
 export default function Navbar() {
     const {authLoading, currentUser, logout} = useAuthStore();
@@ -21,7 +22,6 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isSearchOpen, setIsSearchOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-
 
     useEffect(() => {
         if (isOpen) {
@@ -50,7 +50,7 @@ export default function Navbar() {
                     <form onSubmit={handleSearchSubmit}>
                         <Input
                             placeholder={"Search"}
-                            className={"w-96"}
+                            className={"w-96 h-10 bg-black/50 border-none"}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />

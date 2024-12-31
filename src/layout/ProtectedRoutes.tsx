@@ -1,17 +1,17 @@
 import useAuthStore from "@/store/authStore.ts";
-import {Navigate, Outlet} from "react-router";
+import {Navigate, Outlet, useLocation} from "react-router";
 import LoadingSpinner from "@/components/LoadingSpinner.tsx";
 
-export default function ProtectedRoutes(){
-
-    const { currentUser, authLoading } = useAuthStore();
+export default function ProtectedRoutes() {
+    const location = useLocation();
+    const {currentUser, authLoading} = useAuthStore();
 
 
     if (authLoading) {
-        return <LoadingSpinner />;
+        return <LoadingSpinner/>;
     }
 
 
-    return currentUser ? <Outlet /> : <Navigate to="/login" replace />;
+    return currentUser ? <Outlet/> : <Navigate to="/login" state={{from: location}} replace/>;
 
 }

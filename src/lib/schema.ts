@@ -25,4 +25,15 @@ export const artifactSchema = z.object({
     discoveredAt: z.string().min(1, "Discovery date is required"),
     discoveredBy: z.string().min(1, "Discoverer is required"),
     presentLocation: z.string().min(1, "Present location is required"),
+    artifactAdder: z.string().min(1, "Artifact adder is required"),
+    adderEmail: z.string().email("Invalid email address"),
+    likeCount: z.number().default(0),
+    likes: z.array(z.string()).default([]),
 });
+
+export const likeSchema = z.object({
+    artifactName: z.string().min(1, "Artifact name is required"),
+    userEmail: z.string().email("Invalid email address"),
+});
+
+export type Like = z.infer<typeof likeSchema>;

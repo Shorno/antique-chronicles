@@ -28,7 +28,7 @@ export default function AddArtifact() {
         onSuccess: (data) => {
             console.log("Artifact added successfully", data);
             toast.success('Artifact added successfully');
-            queryClient.invalidateQueries({queryKey : ["artifacts"], refetchType: "active"});
+            queryClient.invalidateQueries({queryKey: ["artifacts"], refetchType: "active"});
         },
         onError: (error: unknown) => {
             console.error("Error adding artifact:", error);
@@ -121,12 +121,16 @@ export default function AddArtifact() {
                                     <p className="mt-1 text-xs text-red-600">{errors.presentLocation.message}</p>}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Artifact Adder</label>
-                                <Input value={currentUser?.displayName || ""} readOnly className="mt-1 bg-gray-100"/>
+                                <label htmlFor={"artifactAdder"} className="block text-sm font-medium text-gray-700">Artifact
+                                    Adder</label>
+                                <Input id={"artifactAdder"} value={currentUser?.displayName || ""}
+                                       readOnly {...register("artifactAdder")} className="mt-1 bg-gray-100"/>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700">Adder Email</label>
-                                <Input value={currentUser?.email || ""} readOnly className="mt-1 bg-gray-100"/>
+                                <label htmlFor={"adderEmail"} className="block text-sm font-medium text-gray-700">Adder
+                                    Email</label>
+                                <Input id="adderEmail" value={currentUser?.email || ""}
+                                       readOnly {...register("adderEmail")} className="mt-1 bg-gray-100"/>
                             </div>
                         </div>
                         <div className="col-span-full">

@@ -31,6 +31,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     currentUser: null,
     authLoading: true,
 
+
     setAuthLoading: (loading: boolean) => set({authLoading: loading}),
     setCurrentUser: (user: User | null) => set({currentUser: user}),
 

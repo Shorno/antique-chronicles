@@ -18,3 +18,18 @@ export const fetchArtifactByName = async (artifactName: string) => {
     const response = await axiosInstance.get(`/artifacts/${artifactName}`);
     return response.data;
 }
+
+export const getArtifactsByEmail = async (email: string) => {
+    const response = await axiosInstance.get(`/artifacts/user/${email}`);
+    return response.data;
+}
+
+export const toggleLike = async (artifactName: string, userEmail: string) => {
+    const response = await axiosInstance.post(`/artifacts/${artifactName}/toggle-like`, { userEmail });
+    return response.data;
+};
+
+export const getLikeStatus = async (artifactName: string, userEmail: string) => {
+    const response = await axiosInstance.get(`/artifacts/${artifactName}/like-status?userEmail=${userEmail}`);
+    return response.data;
+};

@@ -9,11 +9,12 @@ import {registrationSchema} from "@/lib/schema.ts";
 import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
 import useAuthStore from "@/store/authStore.ts";
+import GoogleIcon from "@/components/ui/GoogleIcon.tsx";
 
 type FormData = z.infer<typeof registrationSchema>;
 
 export default function Register() {
-    const {signUp} = useAuthStore();
+    const {signUp, signInWithGoogle} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(registrationSchema)
@@ -42,6 +43,17 @@ export default function Register() {
             setIsLoading(false);
         }
     };
+
+    const handleGoogleSignIn = async () => {
+        try {
+            await signInWithGoogle();
+            toast.success('Sign in successful');
+            navigate('/');
+        } catch (error: any) {
+            toast.error(`Sign in failed ${error.message}`);
+        }
+    }
+
 
     return (
         <AuthLayout title={"Register to explore more on"}>
@@ -76,6 +88,10 @@ export default function Register() {
                     Log in
                 </Link>
             </p>
+            <Button onClick={handleGoogleSignIn} type="submit" className="w-full bg-gray-800 hover:bg-amber-700 my-4">
+                Sign in with Google <GoogleIcon/>
+            </Button>
+
         </AuthLayout>
     );
 }

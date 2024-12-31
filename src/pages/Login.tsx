@@ -4,21 +4,34 @@ import {useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {Input} from "@/components/ui/input.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {Link, useNavigate} from "react-router";
+import {Link, useLocation, useNavigate} from "react-router";
 import {loginSchema} from "@/lib/schema.ts";
 import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
 import useAuthStore from "@/store/authStore.ts";
+import GoogleIcon from "@/components/ui/GoogleIcon.tsx";
 
 type FormData = z.infer<typeof loginSchema>;
 
 export default function Login() {
-    const {login} = useAuthStore();
+    const {login, signInWithGoogle} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
         resolver: zodResolver(loginSchema)
     });
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
+
+    const handleGoogleSignIn = async () => {
+        try {
+            await signInWithGoogle();
+            toast.success('Sign in successful');
+            navigate(from, {replace: true});
+        } catch (error: any) {
+            toast.error(`Sign in failed ${error.message}`);
+        }
+    }
 
 
     const onSubmit = async (formData: FormData) => {
@@ -27,7 +40,7 @@ export default function Login() {
             setIsLoading(true);
             await login(email, password);
             toast.success('Login successful');
-            navigate('/');
+            navigate(from, {replace: true});
         } catch (error: any) {
             switch (error.code) {
                 case 'auth/invalid-credential':
@@ -64,6 +77,9 @@ export default function Login() {
                     Register
                 </Link>
             </p>
+            <Button onClick={handleGoogleSignIn} type="submit" className="w-full bg-gray-800 hover:bg-amber-700 my-4">
+                Sign in with Google <GoogleIcon/>
+            </Button>
         </AuthLayout>
     );
 }
