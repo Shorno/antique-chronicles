@@ -38,7 +38,7 @@ export default function Navbar() {
 
 
     return (
-        <div className={`bg-primaryBlack p-4 md:p-8 w-full top-0`}>
+        <div className={`bg-gray-900 p-4 md:p-8 w-full top-0`}>
             <nav className="mx-auto container text-white flex justify-between items-center">
                 <Link to={"/"} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>

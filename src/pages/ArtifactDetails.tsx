@@ -99,7 +99,7 @@ export default function ArtifactDetails() {
     } = artifactDetails;
 
     return (
-        <div className="min-h-screen bg-primaryBlack text-gray-100">
+        <div className="min-h-screen bg-gray-900 text-gray-100">
             <main className="container mx-auto px-4 py-8">
                 <section className="mb-12 relative">
                     <div className="grid md:grid-cols-2 gap-8 items-center">

@@ -5,7 +5,7 @@ import {Input} from "@/components/ui/input.tsx";
 export default function Footer() {
     return (
 
-        <footer className={"bg-primaryBlack py-10"}>
+        <footer className={"bg-gray-900 py-10"}>
             <div className={"mx-auto container"}>
                 <div className={"flex md:flex-row flex-col-reverse p-4 sm:p-0 justify-between md:items-center  gap-8"}>
                     <div className={"flex flex-col gap-8"}>
