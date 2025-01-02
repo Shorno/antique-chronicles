@@ -10,6 +10,7 @@ import ProtectedRoutes from "@/layout/ProtectedRoutes.tsx";
 import ArtifactDetails from "@/pages/ArtifactDetails.tsx";
 import MyArtifacts from "@/pages/MyArtifacts.tsx";
 import UpdateArtifact from "@/pages/UpdateArtifact.tsx";
+import ScrollToTop from "@/lib/FixScroll.tsx";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     return (
         <>
             <BrowserRouter>
+                <ScrollToTop/>
                 <Routes>
                     <Route element={<MainLayout/>}>
                         <Route path="/" element={<Home/>}/>
@@ -35,6 +37,7 @@ function App() {
             <Toaster position={"top-center"}/>
         </>
     )
+
 }
 
 export default App

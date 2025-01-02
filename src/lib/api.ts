@@ -24,6 +24,11 @@ export const updateArtifact = async (artifactName: string, formData: ArtifactFor
     return response.data;
 }
 
+export const deleteArtifact = async (artifactName: string) => {
+    const response = await axiosInstance.delete(`/artifacts/${artifactName}`);
+    return response.data;
+}
+
 export const getArtifactsByEmail = async (email: string) => {
     const response = await axiosInstance.get(`/artifacts/user/${email}`);
     return response.data;
