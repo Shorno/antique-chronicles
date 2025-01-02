@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import {getFeaturedArtifacts} from "@/lib/api.ts";
 import {motion} from "motion/react";
-import {AlertTriangle, FileQuestion, Heart} from "lucide-react";
+import {AlertTriangle, ArrowRight, FileQuestion, Heart} from "lucide-react";
 import {Button} from "@/components/ui/button.tsx";
 import {ArtifactDetails} from "@/pages/ArtifactDetails.tsx";
 import {useNavigate} from "react-router";
@@ -37,7 +37,7 @@ export default function FeaturedArtifacts() {
         <>
             <section className="py-16 bg-gray-900">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl md:text-4xl font-bold text-center text-yellow-500 mb-12">Featured
+                    <h2 className="text-3xl md:text-5xl font-bold text-center font-baskervville text-yellow-500 mb-12">Featured
                         Artifacts</h2>
 
                     {isLoading ? (
@@ -102,6 +102,15 @@ export default function FeaturedArtifacts() {
                                         ))}
                                     </motion.div>
                                 )}
+                </div>
+                <div className="flex justify-center py-20">
+                    <Button
+                        onClick={() => navigate('/artifacts')}
+                        className="bg-yellow-600 hover:bg-yellow-700 text-gray-900 font-semibold py-3 px-8 rounded-sm text-lg transition duration-300 shadow-lg hover:shadow-xl"
+                    >
+                        View All Artifacts
+                        <ArrowRight className="w-6 h-6 ml-2" fill="currentColor"/>
+                    </Button>
                 </div>
             </section>
         </>

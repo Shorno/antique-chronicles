@@ -9,6 +9,7 @@ import Login from "@/pages/Login.tsx";
 import ProtectedRoutes from "@/layout/ProtectedRoutes.tsx";
 import ArtifactDetails from "@/pages/ArtifactDetails.tsx";
 import MyArtifacts from "@/pages/MyArtifacts.tsx";
+import UpdateArtifact from "@/pages/UpdateArtifact.tsx";
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
                             <Route path="/add-artifacts" element={<AddArtifacts/>}/>
                             <Route path="/artifacts/:artifactName" element={<ArtifactDetails/>}/>
                             <Route path="/my-artifacts" element={<MyArtifacts/>}/>
+                            <Route path="/my-artifacts/update/:artifactName" element={<UpdateArtifact/>}/>
                         </Route>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>

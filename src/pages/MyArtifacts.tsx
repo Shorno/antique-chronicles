@@ -26,7 +26,9 @@ export default function MyArtifacts() {
     if (!myArtifacts || myArtifacts.length === 0) {
         return <NoDataMessage message={"Please add Artifacts to see them here"}/>
     }
-
+    const handleUpdate = () => {
+        console.log("Update button clicked")
+    }
 
     return (
         <>
@@ -35,7 +37,7 @@ export default function MyArtifacts() {
                     <h2 className="text-3xl font-bold text-center text-primaryBlack mb-8">My Artifacts</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {myArtifacts.map((artifact: any) => (
-                            <ArtifactCard key={artifact._id} {...artifact} />
+                            <ArtifactCard key={artifact._id} {...artifact} showUpdateButton={true} onUpdate={handleUpdate}  />
                         ))}
                     </div>
                 </div>

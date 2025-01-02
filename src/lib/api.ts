@@ -19,6 +19,11 @@ export const fetchArtifactByName = async (artifactName: string) => {
     return response.data;
 }
 
+export const updateArtifact = async (artifactName: string, formData: ArtifactFormData) => {
+    const response = await axiosInstance.patch(`/artifacts/${artifactName}`, formData);
+    return response.data;
+}
+
 export const getArtifactsByEmail = async (email: string) => {
     const response = await axiosInstance.get(`/artifacts/user/${email}`);
     return response.data;
