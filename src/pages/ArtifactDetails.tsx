@@ -9,7 +9,7 @@ import {toast} from "react-hot-toast";
 import useAuthStore from "@/store/authStore.ts";
 import {deSlugify} from "@/lib/slugify.ts";
 
-interface ArtifactDetails {
+export interface ArtifactDetails {
     _id: string;
     name: string;
     imageUrl: string;
@@ -33,9 +33,8 @@ export default function ArtifactDetails() {
     const {currentUser} = useAuthStore();
     const queryClient = useQueryClient();
     const originalName = deSlugify(artifactName || "");
-    //fix like status
 
-    const {data: artifactDetails, isLoading, isError, isFetchedAfterMount} = useQuery<ArtifactDetails>({
+    const {data: artifactDetails, isLoading, isError} = useQuery<ArtifactDetails>({
         queryKey: ["artifactDetails", originalName],
         queryFn: () => fetchArtifactByName(originalName),
     });
@@ -80,9 +79,7 @@ export default function ArtifactDetails() {
     if (isError) {
         return <ServerErrorMessage/>;
     }
-    if (!isFetchedAfterMount) {
-        return <div>fethinmg</div>
-    }
+
     if (!artifactDetails) {
         return <NoDataMessage message={"The Artifact is not found"}/>;
     }

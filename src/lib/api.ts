@@ -33,3 +33,8 @@ export const getLikeStatus = async (artifactName: string, userEmail: string) => 
     const response = await axiosInstance.get(`/artifacts/${artifactName}/like-status?userEmail=${userEmail}`);
     return response.data;
 };
+
+export const getFeaturedArtifacts = async () => {
+    const response = await axiosInstance.get("/featured-artifacts/");
+    return response.data;
+}

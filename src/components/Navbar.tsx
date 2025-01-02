@@ -38,7 +38,7 @@ export default function Navbar() {
 
 
     return (
-        <div className={`bg-gray-900 p-4 md:p-8 w-full top-0`}>
+        <div className={`bg-gray-900 p-4 md:p-8 w-full top-0 border-b border-b-gray-700`}>
             <nav className="mx-auto container text-white flex justify-between items-center">
                 <Link to={"/"} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>
@@ -50,7 +50,7 @@ export default function Navbar() {
                     <form onSubmit={handleSearchSubmit}>
                         <Input
                             placeholder={"Search"}
-                            className={"w-96 h-10 bg-black/50 border-none"}
+                            className={"w-96 h-10 bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:border-gray-600 focus:ring-gray-600"}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -163,7 +163,7 @@ export default function Navbar() {
                             animate={{opacity: 1}}
                             exit={{opacity: 0}}
                             transition={{duration: 0.2}}
-                            className="lg:hidden fixed inset-0 bg-primaryBlack mt-24 z-[60]"
+                            className="lg:hidden fixed inset-0 bg-gray-900 border-t border-t-gray-700 mt-[97px] md:mt-32 z-[60]"
                         >
                             <motion.div
                                 className="flex flex-col h-full pt-16"
