@@ -10,6 +10,7 @@ import useAuthStore from "@/store/authStore.ts";
 import {deSlugify} from "@/lib/slugify.ts";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 import UnauthorizedAlert from "@/components/UnauthorizedAlert.tsx";
+import {CustomError} from "@/pages/MyArtifacts.tsx";
 
 export interface ArtifactDetails {
     _id: string;
@@ -78,7 +79,7 @@ export default function ArtifactDetails() {
     if (isLoading) {
         return <LoadingSpinner/>;
     }
-    if (error?.status === 401 || likeStatusError?.status === 401) {
+    if ((error as CustomError)?.status === 401 || (likeStatusError as CustomError)?.status === 401) {
         return (
            <UnauthorizedAlert/>
         );

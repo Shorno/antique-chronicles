@@ -11,9 +11,12 @@ import {ArtifactDetails} from "@/pages/ArtifactDetails.tsx";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 import UnauthorizedAlert from "@/components/UnauthorizedAlert.tsx";
 
+export interface CustomError extends Error {
+    status?: number;
+}
+
 export default function MyArtifacts() {
     useDynamicTitle(`My Artifacts - ${SITE_TITLE}`)
-
 
     const {currentUser} = useAuthStore()
     const {data: myArtifacts, isLoading, isError, error} = useQuery({
@@ -46,7 +49,7 @@ export default function MyArtifacts() {
     if (isLoading) {
         return <LoadingSpinner/>
     }
-    if (error?.status === 401) {
+    if ((error as CustomError)?.status === 401) {
         return (
             <UnauthorizedAlert/>
         );
