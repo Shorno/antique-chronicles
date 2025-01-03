@@ -1,6 +1,8 @@
 import Hero from "@/components/Hero.tsx";
 import FeaturedArtifacts from "@/components/FeaturedArtifacts.tsx";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
+import {ExploreCollection} from "@/components/ExploreCollection.tsx";
+import {ExhibitionsAndEvents} from "@/components/ExhibitionsAndEvents.tsx";
 
 export default function Home() {
     useDynamicTitle(SITE_TITLE)
@@ -8,6 +10,8 @@ export default function Home() {
         <>
             <Hero/>
             <FeaturedArtifacts/>
+            <ExploreCollection/>
+            <ExhibitionsAndEvents/>
         </>
     )
 }

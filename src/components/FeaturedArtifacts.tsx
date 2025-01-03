@@ -37,7 +37,7 @@ export default function FeaturedArtifacts() {
         <>
             <section className="py-16 bg-gray-900">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-3xl md:text-5xl font-bold text-center font-baskervville text-yellow-500 mb-12">Featured
+                    <h2 className="text-3xl md:text-5xl font-bold text-center font-baskervville text-white mb-12">Featured
                         Artifacts</h2>
 
                     {isLoading ? (
