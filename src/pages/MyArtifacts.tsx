@@ -9,13 +9,14 @@ import {toast} from "react-hot-toast";
 import {useNavigate} from "react-router";
 import {ArtifactDetails} from "@/pages/ArtifactDetails.tsx";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
+import UnauthorizedAlert from "@/components/UnauthorizedAlert.tsx";
 
 export default function MyArtifacts() {
     useDynamicTitle(`My Artifacts - ${SITE_TITLE}`)
 
 
     const {currentUser} = useAuthStore()
-    const {data: myArtifacts, isLoading, isError} = useQuery({
+    const {data: myArtifacts, isLoading, isError, error} = useQuery({
         queryKey: ["my-artifacts", currentUser?.email],
         queryFn: () => getArtifactsByEmail(currentUser?.email || ""),
         enabled: !!currentUser?.email
@@ -44,6 +45,11 @@ export default function MyArtifacts() {
 
     if (isLoading) {
         return <LoadingSpinner/>
+    }
+    if (error?.status === 401) {
+        return (
+            <UnauthorizedAlert/>
+        );
     }
 
     if (isError) {

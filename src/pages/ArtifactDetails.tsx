@@ -9,6 +9,7 @@ import {toast} from "react-hot-toast";
 import useAuthStore from "@/store/authStore.ts";
 import {deSlugify} from "@/lib/slugify.ts";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
+import UnauthorizedAlert from "@/components/UnauthorizedAlert.tsx";
 
 export interface ArtifactDetails {
     _id: string;
@@ -36,12 +37,12 @@ export default function ArtifactDetails() {
     const originalName = deSlugify(artifactName || "");
     useDynamicTitle(`${originalName} - ${SITE_TITLE}`)
 
-    const {data: artifactDetails, isLoading, isError} = useQuery<ArtifactDetails>({
+    const {data: artifactDetails, isLoading, isError, error} = useQuery<ArtifactDetails>({
         queryKey: ["artifactDetails", originalName],
         queryFn: () => fetchArtifactByName(originalName),
     });
 
-    const {data: likeStatus} = useQuery<LikeStatus>({
+    const {data: likeStatus, error:likeStatusError} = useQuery<LikeStatus>({
         queryKey: ["likeStatus", originalName, currentUser?.email],
         queryFn: () => getLikeStatus(originalName, currentUser?.email || ""),
         enabled: !!currentUser?.email && !!originalName
@@ -76,6 +77,11 @@ export default function ArtifactDetails() {
 
     if (isLoading) {
         return <LoadingSpinner/>;
+    }
+    if (error?.status === 401 || likeStatusError?.status === 401) {
+        return (
+           <UnauthorizedAlert/>
+        );
     }
 
     if (isError) {

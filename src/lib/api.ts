@@ -54,3 +54,7 @@ export const searchArtifactsByName = async (artifactName: string) => {
     return response.data;
 }
 
+export const verify = async (user: string) => {
+    const response = await axiosInstance.post("/auth/verify", {user});
+    return response.data;
+}

@@ -11,6 +11,7 @@ import AuthLayout from "@/layout/AuthLayout.tsx";
 import useAuthStore from "@/store/authStore.ts";
 import GoogleIcon from "@/components/ui/GoogleIcon.tsx";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
+import {verify} from "@/lib/api.ts";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -43,6 +44,8 @@ export default function Login() {
             setIsLoading(true);
             await login(email, password);
             toast.success('Login successful');
+            await verify(email);
+
             navigate(from, {replace: true});
         } catch (error: any) {
             switch (error.code) {
