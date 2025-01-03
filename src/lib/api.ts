@@ -58,3 +58,6 @@ export const verify = async (user: string | null | undefined) => {
     const response = await axiosInstance.post("/auth/verify", {user});
     return response.data;
 }
+export const clearJWTToken = async () => {
+    return axiosInstance.post("/auth/logout");
+}

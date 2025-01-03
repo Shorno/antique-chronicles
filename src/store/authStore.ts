@@ -11,6 +11,7 @@ import {
     UserCredential
 } from "firebase/auth"
 import {auth} from "../firebase.js"
+import {clearJWTToken} from "@/lib/api.ts";
 
 type AuthState = {
     currentUser: User | null;
@@ -69,6 +70,7 @@ const useAuthStore = create<AuthStore>((set) => ({
     logout: async () => {
         try {
             await signOut(auth);
+            await clearJWTToken();
         } catch (error) {
             console.error(error);
             throw error;
