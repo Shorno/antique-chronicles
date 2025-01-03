@@ -11,6 +11,7 @@ import AuthLayout from "@/layout/AuthLayout.tsx";
 import useAuthStore from "@/store/authStore.ts";
 import GoogleIcon from "@/components/ui/GoogleIcon.tsx";
 import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
+import {verify} from "@/lib/api.ts";
 
 type FormData = z.infer<typeof registrationSchema>;
 
@@ -30,8 +31,8 @@ export default function Register() {
         try {
             setIsLoading(true);
             await signUp(email, password, displayName, photoURL);
+            await verify(email);
             toast.success('Registration successful');
-
             navigate('/');
         } catch (error: any) {
             switch (error.code) {
@@ -50,6 +51,8 @@ export default function Register() {
     const handleGoogleSignIn = async () => {
         try {
             await signInWithGoogle();
+            const user = useAuthStore.getState().currentUser?.email;
+            await verify(user);
             toast.success('Sign in successful');
             navigate('/');
         } catch (error: any) {

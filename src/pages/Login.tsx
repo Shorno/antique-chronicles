@@ -30,6 +30,8 @@ export default function Login() {
     const handleGoogleSignIn = async () => {
         try {
             await signInWithGoogle();
+            const user = useAuthStore.getState().currentUser?.email;
+            await verify(user);
             toast.success('Sign in successful');
             navigate(from, {replace: true});
         } catch (error: any) {
@@ -45,7 +47,6 @@ export default function Login() {
             await login(email, password);
             toast.success('Login successful');
             await verify(email);
-
             navigate(from, {replace: true});
         } catch (error: any) {
             switch (error.code) {
