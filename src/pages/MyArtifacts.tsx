@@ -8,8 +8,11 @@ import NoDataMessage from "@/components/NoDataMessage.tsx";
 import {toast} from "react-hot-toast";
 import {useNavigate} from "react-router";
 import {ArtifactDetails} from "@/pages/ArtifactDetails.tsx";
+import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 
 export default function MyArtifacts() {
+    useDynamicTitle(`My Artifacts - ${SITE_TITLE}`)
+
 
     const {currentUser} = useAuthStore()
     const {data: myArtifacts, isLoading, isError} = useQuery({

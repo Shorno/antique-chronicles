@@ -11,11 +11,13 @@ import {Textarea} from "@/components/ui/textarea.tsx";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {addArtifacts} from "@/lib/api.ts";
 import useAuthStore from "@/store/authStore.ts";
+import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 
 
 type FormData = z.infer<typeof artifactSchema>;
 
 export default function AddArtifact() {
+    useDynamicTitle(`Add Artifacts - ${SITE_TITLE}`)
     const {currentUser} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}, control} = useForm<FormData>({

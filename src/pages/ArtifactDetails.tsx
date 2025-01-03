@@ -8,6 +8,7 @@ import {Clock, MapPin, User, Info, Heart} from 'lucide-react';
 import {toast} from "react-hot-toast";
 import useAuthStore from "@/store/authStore.ts";
 import {deSlugify} from "@/lib/slugify.ts";
+import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 
 export interface ArtifactDetails {
     _id: string;
@@ -33,6 +34,7 @@ export default function ArtifactDetails() {
     const {currentUser} = useAuthStore();
     const queryClient = useQueryClient();
     const originalName = deSlugify(artifactName || "");
+    useDynamicTitle(`${originalName} - ${SITE_TITLE}`)
 
     const {data: artifactDetails, isLoading, isError} = useQuery<ArtifactDetails>({
         queryKey: ["artifactDetails", originalName],

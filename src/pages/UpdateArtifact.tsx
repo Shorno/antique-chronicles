@@ -17,6 +17,7 @@ import {z} from "zod";
 import LoadingSpinner from "@/components/LoadingSpinner.tsx";
 import ServerErrorMessage from "@/components/ServerErrorMessage.tsx";
 import NoDataMessage from "@/components/NoDataMessage.tsx";
+import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 
 type FormData = z.infer<typeof artifactSchema>;
 
@@ -29,6 +30,7 @@ export default function UpdateArtifact() {
     const {register, handleSubmit, formState: {errors}, control} = useForm<FormData>({
         resolver: zodResolver(artifactSchema)
     });
+    useDynamicTitle(`${originalName} - ${SITE_TITLE}`)
 
 
     const {data: artifactDetails, isLoading, isError} = useQuery<ArtifactDetails>({

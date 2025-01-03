@@ -1,10 +1,9 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
 import {Link} from "react-router";
-import {FormEvent, useEffect, useState} from "react";
-import {ChevronRight, Menu, Search, UserIcon, X} from 'lucide-react';
+import {useEffect, useState} from "react";
+import {ChevronRight, Menu, UserIcon, X} from 'lucide-react';
 import {motion, AnimatePresence} from "motion/react";
 import {Button} from "@/components/ui/button.tsx";
-import {Input} from "@/components/ui/input.tsx";
 import AuthLinks, {AuthContent} from "@/components/AuthLinks.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import useAuthStore from "@/store/authStore.ts";
@@ -20,8 +19,6 @@ export default function Navbar() {
     const {authLoading, currentUser, logout} = useAuthStore();
 
     const [isOpen, setIsOpen] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         if (isOpen) {
@@ -31,31 +28,17 @@ export default function Navbar() {
         }
     }, [isOpen]);
 
-    const handleSearchSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        console.log("Search submitted:", searchQuery);
-    };
 
 
     return (
         <div className={`bg-gray-900 p-4 md:p-8 w-full top-0 border-b border-b-gray-700`}>
             <nav className="mx-auto container text-white flex justify-between items-center">
-                <Link to={"/"} className={"flex items-baseline font-baskervville gap-0.5"}>
+                <Link to={"/"} onClick={()=>setIsOpen(false)} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>
                     <div className={"text-2xl lg:text-4xl flex flex-col lg:leading-10"}><span>Antique</span>
                         <span>Chronicles</span>
                     </div>
                 </Link>
-                <div className={"hidden md:block"}>
-                    <form onSubmit={handleSearchSubmit}>
-                        <Input
-                            placeholder={"Search"}
-                            className={"w-96 h-10 bg-gray-800 text-white placeholder-gray-400 border border-gray-700 focus:border-gray-600 focus:ring-gray-600"}
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                        />
-                    </form>
-                </div>
                 <div className="hidden lg:flex items-center space-x-8 font-semibold">
                     {navLinks.map((link) => (
                         <AnimatedNavLink
@@ -70,41 +53,6 @@ export default function Navbar() {
                 </div>
                 <motion.div className="lg:hidden  relative">
                     <div className={"flex gap-8 justify-center items-center"}>
-                        <div>
-                            {
-                                !isSearchOpen && <Search onClick={() => setIsSearchOpen(true)}/>
-                            }
-                            {isSearchOpen && (
-                                <motion.div
-                                    initial={{opacity: 0, y: -20}}
-                                    animate={{opacity: 1, y: 0}}
-                                    exit={{opacity: 0, y: -20}}
-                                    transition={{duration: 0.2}}
-                                    className="lg:hidden fixed  top-0 left-0  right-0 bg-primaryBlack p-4 z-50"
-                                >
-                                    <div className="flex flex-col gap-2">
-                                        <div className={"flex justify-between items-center"}>
-                                            <h1 className={"text-lg"}>Search Through History</h1>
-                                            <X size={20} onClick={() => setIsSearchOpen(false)}/>
-                                        </div>
-                                        <div className={"flex gap-4 items-center"}>
-                                            <form onSubmit={handleSearchSubmit}
-                                                  className={"flex w-full gap-4 items-center"}>
-                                                <Input
-                                                    placeholder="Search"
-                                                    className="flex-grow relative"
-                                                    value={searchQuery}
-                                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                                />
-                                                <button type="submit">
-                                                    <Search size={30}/>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            )}
-                        </div>
                         {authLoading ?
                             (<Avatar className={"size-8"}>
                                 <AvatarFallback className={"bg-gray-700"}>

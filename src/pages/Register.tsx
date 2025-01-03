@@ -10,10 +10,13 @@ import toast from "react-hot-toast";
 import AuthLayout from "@/layout/AuthLayout.tsx";
 import useAuthStore from "@/store/authStore.ts";
 import GoogleIcon from "@/components/ui/GoogleIcon.tsx";
+import useDynamicTitle, {SITE_TITLE} from "@/lib/dynamicTitle.tsx";
 
 type FormData = z.infer<typeof registrationSchema>;
 
 export default function Register() {
+    useDynamicTitle(`Sign Up - ${SITE_TITLE}`)
+
     const {signUp, signInWithGoogle} = useAuthStore();
     const [isLoading, setIsLoading] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
