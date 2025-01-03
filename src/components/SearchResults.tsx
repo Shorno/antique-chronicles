@@ -12,16 +12,46 @@ export interface SearchResult {
 interface SearchResultsProps {
     results: SearchResult[];
     query: string;
+    isLoading: boolean;
 }
 
-export function SearchResults({results, query}: SearchResultsProps) {
+export function SearchResults({results, query, isLoading = true}: SearchResultsProps) {
+    if (isLoading) {
+        return (
+            <ul className="py-2">
+                {[...Array(1)].map((_, index) => (
+                    <li
+                        key={index}
+                        className="px-4 py-3 flex items-center space-x-4"
+                    >
+                        <div className="w-16 h-16 bg-gray-200 rounded-lg animate-pulse"></div>
+                        <div className="space-y-2 flex-1">
+                            <div className="h-4 bg-gray-200 rounded w-2/4 animate-pulse"></div>
+                            <div className="h-4 bg-gray-200 rounded w-1/5 animate-pulse"></div>
+                            <div className="h-4 bg-gray-200 rounded w-1/4 animate-pulse"></div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        )
+    }
 
     if (results.length === 0 && query.length >= 2) {
         return (
-            <div className="px-4 py-6 text-center text-gray-500">
-                No results found for "{query}"
-            </div>
-        );
+            <ul className="py-2">
+                <li className="px-4 py-3 flex items-center space-x-4">
+                    <div className="w-16 h-16 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <div className="flex-1">
+                        <p className="text-sm text-gray-500">No Artifact found for &quot;{query}&quot;</p>
+                        <p className="text-sm text-gray-400 mt-1">Try adjusting your search terms</p>
+                    </div>
+                </li>
+            </ul>
+        )
     }
 
     return (

@@ -8,7 +8,7 @@ export function SearchBar() {
     const [artifactName, setArtifactName] = useState('');
     const [isOpen, setIsOpen] = useState(false);
 
-    const {data: results = []} = useQuery({
+    const {data: results = [], isLoading} = useQuery({
         queryKey: ['search', artifactName],
         queryFn: () => searchArtifactsByName(artifactName),
         enabled: artifactName.length >= 2,
@@ -65,6 +65,7 @@ export function SearchBar() {
                     <SearchResults
                         results={results}
                         query={artifactName}
+                        isLoading={isLoading}
                     />
                 </div>
             )}

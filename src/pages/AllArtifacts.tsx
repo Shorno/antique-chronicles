@@ -22,7 +22,7 @@ export default function AllArtifacts() {
                 >
                     Artifact Collection
                 </motion.h2>
-                <div className={"py-10"}>
+                <div className={"py-4"}>
                     <SearchBar/>
                 </div>
                 <ArtifactGrid/>
