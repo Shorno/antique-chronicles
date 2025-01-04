@@ -11,6 +11,7 @@ import ArtifactDetails from "@/pages/ArtifactDetails.tsx";
 import MyArtifacts from "@/pages/MyArtifacts.tsx";
 import UpdateArtifact from "@/pages/UpdateArtifact.tsx";
 import ScrollToTop from "@/lib/FixScroll.tsx";
+import NotFound from "@/components/NotFound.tsx";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
                         </Route>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>
+                        <Route path="*" element={<NotFound/>}/>
                     </Route>
                 </Routes>
             </BrowserRouter>
