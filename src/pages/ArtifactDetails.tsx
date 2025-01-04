@@ -36,6 +36,8 @@ export default function ArtifactDetails() {
     const {currentUser} = useAuthStore();
     const queryClient = useQueryClient();
     const originalName = deSlugify(artifactName || "");
+
+    console.log(originalName)
     useDynamicTitle(`${originalName} - ${SITE_TITLE}`)
 
     const {data: artifactDetails, isLoading, isError, error} = useQuery<ArtifactDetails>({

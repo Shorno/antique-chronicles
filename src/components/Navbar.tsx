@@ -14,6 +14,7 @@ const navLinks = [
     {title: 'All Artifacts', href: '/artifacts'},
     {title: 'Add Artifacts', href: '/add-artifacts'},
     {title: 'My Artifacts', href: '/my-artifacts'},
+    {title: 'Liked Artifacts', href: '/liked-artifacts'},
 ]
 export default function Navbar() {
     const {authLoading, currentUser, logout} = useAuthStore();

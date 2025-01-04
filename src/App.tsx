@@ -12,6 +12,7 @@ import MyArtifacts from "@/pages/MyArtifacts.tsx";
 import UpdateArtifact from "@/pages/UpdateArtifact.tsx";
 import ScrollToTop from "@/lib/FixScroll.tsx";
 import NotFound from "@/components/NotFound.tsx";
+import LikedArtifacts from "@/pages/LikedArtifacts.tsx";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
                             <Route path="/artifacts/:artifactName" element={<ArtifactDetails/>}/>
                             <Route path="/my-artifacts" element={<MyArtifacts/>}/>
                             <Route path="/my-artifacts/update/:artifactName" element={<UpdateArtifact/>}/>
+                            <Route path="/liked-artifacts" element={<LikedArtifacts/>}/>
                         </Route>
                         <Route path="/register" element={<Register/>}/>
                         <Route path="/login" element={<Login/>}/>

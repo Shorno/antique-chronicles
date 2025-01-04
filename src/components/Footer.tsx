@@ -7,10 +7,10 @@ export default function Footer() {
     return (
 
         <footer className="bg-gray-900 py-10">
-            <div className="container mx-auto">
+            <div className="container mx-auto md:p-8">
                 {/* Social Media and Newsletter Section */}
                 <div
-                    className="flex md:flex-row flex-col-reverse p-4 sm:p-0 justify-between md:items-center gap-8 mb-12">
+                    className="flex md:flex-row flex-col-reverse p-4 bg-red sm:p-0 justify-between md:items-center gap-8 mb-12">
                     <div className="flex flex-col gap-8">
                         <h2 className="text-white text-4xl">Connect with us</h2>
                         <div className="flex gap-4">

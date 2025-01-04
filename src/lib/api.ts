@@ -61,3 +61,7 @@ export const verify = async (user: string | null | undefined) => {
 export const clearJWTToken = async () => {
     return axiosInstance.post("/auth/logout");
 }
+export const getLikedArtifacts = async (email: string) => {
+    const response = await axiosInstance.get(`/liked-artifacts/${email}`);
+    return response.data;
+}

@@ -76,8 +76,7 @@ export default function UpdateArtifact() {
             <div className="min-h-screen bg-stone-100 py-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto bg-white shadow-md rounded-sm overflow-hidden">
                     <div className="px-6 py-8">
-                        <h2 className="text-3xl font-bold text-center text-primaryBlack mb-8">Add
-                            New Artifact</h2>
+                        <h2 className="text-3xl font-bold text-center text-primaryBlack mb-8">Update Artifact Details</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div>
