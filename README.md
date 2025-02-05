@@ -4,7 +4,7 @@
 The Antique Chronicles is a web application that allows users to explore, add, and manage artifacts. It provides a platform for users to register, log in, and interact with various artifacts.
 
 ## Screenshot
-![Screenshot](URL_TO_SCREENSHOT)
+![Screenshot](https://res.cloudinary.com/def3zwztt/image/upload/v1738736266/all-devices-black_dl3zs4.png)
 
 ## Key Features
 - User Authentication (Sign Up, Login, Logout)
