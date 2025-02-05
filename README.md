@@ -21,22 +21,35 @@ The Antique Chronicles is a web application that allows users to explore, add, a
 - `framer-motion`: A library to power production-ready animations
 - `lucide-react`: A collection of simply beautiful open-source icons for React
 
-## Dependencies
-- `react-router`
-- `zustand`
-- `firebase`
-- `react-hot-toast`
-- `framer-motion`
-- `lucide-react`
+## Backend Repository
+This project also includes a backend repository that handles server-side logic and data storage.
+
+### Backend Repository Overview
+The backend repository is responsible for managing the server-side operations of the Antique Chronicles application. It is built using JavaScript and provides APIs for user authentication, artifact management, and other core functionalities.
+
+### Backend Technologies Used
+- JavaScript
+- Node.js
+- Express
+- MongoDB
+
+### Backend Repository URL
+[Antique Chronicles Backend](https://github.com/Shorno/antique-chronicles-backend)
 
 ## Setup Guide
-1. Clone the repository: `git clone https://github.com/Shorno/antique-chronicles.git`
+1. Clone the frontend repository: `git clone https://github.com/Shorno/antique-chronicles.git`
 2. Navigate to the project directory: `cd antique-chronicles`
-3. Install dependencies: `npm install`
-4. Start the development server: `npm start`
+3. Install frontend dependencies: `npm install`
+4. Start the frontend development server: `npm start`
+
+5. Clone the backend repository: `git clone https://github.com/Shorno/antique-chronicles-backend.git`
+6. Navigate to the backend project directory: `cd antique-chronicles-backend`
+7. Install backend dependencies: `npm install`
+8. Start the backend server: `npm start`
 
 ## Live Project Link
 [The Antique Chronicles](https://antique-chronicles.vercel.app)
 
 ## Relevant Resources
 - [Antique Chronicles GitHub Repository](https://github.com/Shorno/antique-chronicles)
+- [Antique Chronicles Backend GitHub Repository](https://github.com/Shorno/antique-chronicles-backend)
