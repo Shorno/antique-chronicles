@@ -4,7 +4,7 @@
 The Antique Chronicles is a web application that allows users to explore, add, and manage artifacts. It provides a platform for users to register, log in, and interact with various artifacts.
 
 ## Screenshot
-*(Add screenshot here if available)*
+![Screenshot](https://res.cloudinary.com/def3zwztt/image/upload/v1738736266/all-devices-black_dl3zs4.png)
 
 ## Key Features
 - **User Authentication:** Sign Up, Login, Logout
@@ -102,7 +102,8 @@ DATABASE_URL=your_database_url
 ```
 
 ## Live Project Link
-[The Antique Chronicles](Insert live project link here if available)
+[The Antique Chronicles](https://antique-chronicles.vercel.app)
+
 
 ## Relevant Resources
 - [Antique Chronicles GitHub Repository](https://github.com/Shorno/antique-chronicles)
