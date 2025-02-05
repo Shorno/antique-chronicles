@@ -1,10 +1,10 @@
 # The Antique Chronicles
 
-## Purpose
+## Overview
 The Antique Chronicles is a web application that allows users to explore, add, and manage artifacts. It provides a platform for users to register, log in, and interact with various artifacts.
 
-## Live URL
-[The Antique Chronicles](https://antique-chronicles.vercel.app)
+## Screenshot
+![Screenshot](URL_TO_SCREENSHOT)
 
 ## Key Features
 - User Authentication (Sign Up, Login, Logout)
@@ -20,3 +20,23 @@ The Antique Chronicles is a web application that allows users to explore, add, a
 - `react-hot-toast`: A React library to add beautiful notifications to your app
 - `framer-motion`: A library to power production-ready animations
 - `lucide-react`: A collection of simply beautiful open-source icons for React
+
+## Dependencies
+- `react-router`
+- `zustand`
+- `firebase`
+- `react-hot-toast`
+- `framer-motion`
+- `lucide-react`
+
+## Setup Guide
+1. Clone the repository: `git clone https://github.com/Shorno/antique-chronicles.git`
+2. Navigate to the project directory: `cd antique-chronicles`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm start`
+
+## Live Project Link
+[The Antique Chronicles](https://antique-chronicles.vercel.app)
+
+## Relevant Resources
+- [Antique Chronicles GitHub Repository](https://github.com/Shorno/antique-chronicles)
