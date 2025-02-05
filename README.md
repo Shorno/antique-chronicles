@@ -1,54 +1,87 @@
-The Antique Chronicles
-Overview
+# The Antique Chronicles
+
+## Overview
 The Antique Chronicles is a web application that allows users to explore, add, and manage artifacts. It provides a platform for users to register, log in, and interact with various artifacts.
 
-Screenshot
-Key Features
-User Authentication (Sign Up, Login, Logout)
-User Authorization (Protected Routes) using JWT Tokens
-Add, View, and Update Artifacts
-Responsive Design
-404 Page for Not Found routes
-npm Packages Used
-react-router: Declarative routing for React
-zustand: A small, fast, and scalable bearbones state-management solution
-firebase: Firebase authentication and other services
-react-hot-toast: A React library to add beautiful notifications to your app
-framer-motion: A library to power production-ready animations
-lucide-react: A collection of simply beautiful open-source icons for React
-Backend Repository Overview
-The backend repository is responsible for managing the server-side operations of the Antique Chronicles application. It is built using JavaScript and provides APIs for user authentication, artifact management, and other core functionalities.
+## Screenshot
+*(Add screenshot here if available)*
 
-Backend Technologies Used
-JavaScript
-Node.js
-Express
-MongoDB
-Backend Repository URL
-Antique Chronicles Backend
+## Key Features
+- **User Authentication:** Sign Up, Login, Logout
+- **User Authorization:** Protected Routes using JWT Tokens
+- **Artifact Management:** Add, View, and Update Artifacts
+- **Responsive Design**
+- **404 Page:** Custom Not Found routes
 
-Setup Guide
-Clone the frontend repository: git clone https://github.com/Shorno/antique-chronicles.git
+## npm Packages Used
+- **react-router:** Declarative routing for React
+- **zustand:** A small, fast, and scalable bearbones state-management solution
+- **firebase:** Firebase authentication and other services
+- **react-hot-toast:** A React library to add beautiful notifications to your app
+- **framer-motion:** A library to power production-ready animations
+- **lucide-react:** A collection of simply beautiful open-source icons for React
 
-Navigate to the project directory: cd antique-chronicles
+## Backend Repository Overview
+The backend repository manages the server-side operations of the Antique Chronicles application. It is built using JavaScript and provides APIs for user authentication, artifact management, and other core functionalities.
 
-Install frontend dependencies: npm install
+### Backend Technologies Used
+- **JavaScript**
+- **Node.js**
+- **Express**
+- **MongoDB**
 
-Start the frontend development server: npm start
+### Backend Repository URL
+[Antique Chronicles Backend](https://github.com/Shorno/antique-chronicles-backend)
 
-Clone the backend repository: git clone https://github.com/Shorno/antique-chronicles-backend.git
+## Setup Guide
 
-Navigate to the backend project directory: cd antique-chronicles-backend
-
-Install backend dependencies: npm install
-
-Start the backend server: npm start
-
+### Frontend
+1. **Clone the frontend repository:**
+   ```bash
+   git clone https://github.com/Shorno/antique-chronicles.git
+Navigate to the project directory:
+bash
+Copy
+Edit
+cd antique-chronicles
+Install frontend dependencies:
+bash
+Copy
+Edit
+npm install
+Start the frontend development server:
+bash
+Copy
+Edit
+npm start
+Backend
+Clone the backend repository:
+bash
+Copy
+Edit
+git clone https://github.com/Shorno/antique-chronicles-backend.git
+Navigate to the backend project directory:
+bash
+Copy
+Edit
+cd antique-chronicles-backend
+Install backend dependencies:
+bash
+Copy
+Edit
+npm install
+Start the backend server:
+bash
+Copy
+Edit
+npm start
 Environment Variables
 Frontend
 Create a .env file in the root directory of the frontend repository and add the following environment variables:
 
 plaintext
+Copy
+Edit
 VITE_BASE_API_URL=your_api_url
 VITE_FIREBASE_MEASUREMENT_ID=your_firebase_measurement_id
 VITE_FIREBASE_APP_ID=your_firebase_app_id
@@ -61,10 +94,13 @@ Backend
 Create a .env file in the root directory of the backend repository and add the following environment variables:
 
 plaintext
+Copy
+Edit
 JWT_SECRET=your_jwt_secret
 DATABASE_URL=your_database_url
 Live Project Link
 The Antique Chronicles
+(Insert live project link here if available)
 
 Relevant Resources
 Antique Chronicles GitHub Repository
