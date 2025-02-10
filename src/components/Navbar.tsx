@@ -32,7 +32,7 @@ export default function Navbar() {
 
 
     return (
-        <div className={`bg-gray-900 p-4 md:p-8 w-full top-0 border-b border-b-gray-700`}>
+        <div className={`bg-gray-900 fixed z-50 p-4 md:p-8 w-full top-0 border-b border-b-gray-700`}>
             <nav className="mx-auto container text-white flex justify-between items-center">
                 <Link to={"/"} onClick={()=>setIsOpen(false)} className={"flex items-baseline font-baskervville gap-0.5"}>
                     <span className={"lg:text-2xl"}>The</span>

@@ -76,7 +76,6 @@ export default function ArtifactDetails() {
         }
         toggleLikeMutation.mutate();
     };
-    console.log(likeStatus?.isLiked)
 
     if (isLoading) {
         return <LoadingSpinner/>;
@@ -107,7 +106,7 @@ export default function ArtifactDetails() {
     } = artifactDetails;
 
     return (
-        <div className="min-h-screen bg-gray-900 text-gray-100">
+        <div className="min-h-screen bg-gray-900 text-gray-100 mt-20 sm:mt-32">
             <main className="container mx-auto px-4 py-8">
                 <section className="mb-12 relative">
                     <div className="grid md:grid-cols-2 gap-8 items-center">

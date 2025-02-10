@@ -8,7 +8,7 @@ export default function AllArtifacts() {
 
     return (
         <motion.div
-            className="bg-stone-100 min-h-screen"
+            className="bg-stone-100 mt-24 sm:mt-36 min-h-screen"
             initial={{opacity: 0}}
             animate={{opacity: 1}}
             transition={{duration: 0.5}}
