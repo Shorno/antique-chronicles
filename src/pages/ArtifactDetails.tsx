@@ -106,7 +106,7 @@ export default function ArtifactDetails() {
     } = artifactDetails;
 
     return (
-        <div className="min-h-screen bg-gray-900 text-gray-100 mt-20 sm:mt-32">
+        <div className="min-h-screen bg-stone-100 dark:bg-gray-900 transition-colors duration-300 text-gray-900 dark:text-gray-100 mt-20 sm:mt-32">
             <main className="container mx-auto px-4 py-8">
                 <section className="mb-12 relative">
                     <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -126,7 +126,7 @@ export default function ArtifactDetails() {
                         </div>
                         <div>
                             <h2 className="text-4xl font-bold mb-4">{name}</h2>
-                            <p className="text-xl mb-6 text-gray-300">{type}</p>
+                            <p className="text-xl mb-6">{type}</p>
                             <div className="space-y-4">
                                 <div className="flex items-center">
                                     <Clock className="w-6 h-6 mr-2 text-yellow-500"/>
@@ -152,12 +152,12 @@ export default function ArtifactDetails() {
                         </div>
                     </div>
                 </section>
-                <section className="bg-gray-800 rounded-lg p-8 shadow-xl">
+                <section className="rounded-lg p-8 shadow-xl">
                     <h3 className="text-2xl font-bold mb-4 flex items-center">
                         <Info className="w-6 h-6 mr-2 text-yellow-500"/>
                         Historical Context
                     </h3>
-                    <p className="text-gray-300 leading-relaxed">{historicalContext}</p>
+                    <p className="leading-relaxed">{historicalContext}</p>
                 </section>
             </main>
         </div>

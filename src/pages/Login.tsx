@@ -84,7 +84,7 @@ export default function Login() {
                     Register
                 </Link>
             </p>
-            <Button onClick={handleGoogleSignIn} type="submit" className="w-full bg-gray-800 hover:bg-amber-700 my-4">
+            <Button onClick={handleGoogleSignIn} type="submit" className="w-full text-white bg-gray-800 hover:bg-amber-700 my-4">
                 Sign in with Google <GoogleIcon/>
             </Button>
         </AuthLayout>

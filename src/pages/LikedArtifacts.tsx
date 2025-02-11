@@ -44,9 +44,9 @@ export default function LikedArtifacts() {
 
     return (
         <>
-            <div className="bg-stone-100 mt-20 sm:mt-32">
+            <div className="bg-stone-100 dark:bg-gray-900 mt-20 sm:mt-32">
                 <div className={"container mx-auto px-4 py-8 min-h-screen"}>
-                    <h2 className="text-3xl font-bold text-center text-primaryBlack mb-8">Liked Artifacts</h2>
+                    <h2 className="text-3xl font-bold text-center text-primaryBlack dark:text-white mb-8">Liked Artifacts</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {likedArtifacts.map((artifact: ArtifactDetails) => (
                             <ArtifactCard id={artifact._id} key={artifact._id} {...artifact}/>

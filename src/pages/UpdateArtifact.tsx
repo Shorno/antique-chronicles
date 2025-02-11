@@ -73,37 +73,55 @@ export default function UpdateArtifact() {
 
     return (
         <>
-            <div className="min-h-screen bg-stone-100 py-12 px-4 sm:px-6 lg:px-8 mt-20 sm:mt-32">
-                <div className="max-w-4xl mx-auto bg-white shadow-md rounded-sm overflow-hidden">
+            <div
+                className="min-h-screen mt-20 sm:mt-32 bg-stone-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+                <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-sm overflow-hidden">
                     <div className="px-6 py-8">
-                        <h2 className="text-3xl font-bold text-center text-primaryBlack mb-8">Update Artifact Details</h2>
+                        <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">Update
+                            Artifact Details</h2>
                         <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                 <div>
-                                    <label htmlFor="name" className="block text-sm font-medium text-gray-700">Artifact
-                                        Name</label>
-                                    <Input id="name" {...register('name')} className="mt-1"
-                                           defaultValue={artifactDetails.name}/>
-                                    {errors.name && <p className="mt-1 text-xs text-red-600">{errors.name.message}</p>}
+                                    <label htmlFor="name"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Artifact Name
+                                    </label>
+                                    <Input
+                                        id="name"
+                                        {...register("name")}
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.name}
+                                    />
+                                    {errors.name &&
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.name.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700">Artifact
-                                        Image URL</label>
-                                    <Input id="imageUrl" {...register('imageUrl')} className="mt-1"
-                                           defaultValue={artifactDetails.imageUrl}/>
+                                    <label htmlFor="imageUrl"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Artifact Image URL
+                                    </label>
+                                    <Input
+                                        id="imageUrl"
+                                        {...register("imageUrl")}
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.imageUrl}
+                                    />
                                     {errors.imageUrl &&
-                                        <p className="mt-1 text-xs text-red-600">{errors.imageUrl.message}</p>}
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.imageUrl.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="type" className="block text-sm font-medium text-gray-700">Artifact
-                                        Type</label>
+                                    <label htmlFor="type"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Artifact Type
+                                    </label>
                                     <Controller
                                         name="type"
                                         control={control}
                                         defaultValue={artifactDetails.type as any}
                                         render={({field}) => (
                                             <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                                <SelectTrigger className="mt-1">
+                                                <SelectTrigger
+                                                    className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
                                                     <SelectValue placeholder="Select type"/>
                                                 </SelectTrigger>
                                                 <SelectContent>
@@ -117,67 +135,121 @@ export default function UpdateArtifact() {
                                             </Select>
                                         )}
                                     />
-                                    {errors.type && <p className="mt-1 text-xs text-red-600">{errors.type.message}</p>}
+                                    {errors.type &&
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.type.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="createdAt" className="block text-sm font-medium text-gray-700">Created
-                                        At</label>
-                                    <Input id="createdAt" {...register('createdAt')} placeholder="e.g., 100 BC"
-                                           className="mt-1" defaultValue={artifactDetails.createdAt}/>
+                                    <label htmlFor="createdAt"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Created At
+                                    </label>
+                                    <Input
+                                        id="createdAt"
+                                        {...register("createdAt")}
+                                        placeholder="e.g., 100 BC"
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.createdAt}
+                                    />
                                     {errors.createdAt &&
-                                        <p className="mt-1 text-xs text-red-600">{errors.createdAt.message}</p>}
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.createdAt.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="discoveredAt" className="block text-sm font-medium text-gray-700">Discovered
-                                        At</label>
-                                    <Input id="discoveredAt" {...register('discoveredAt')} placeholder="e.g., 1799"
-                                           className="mt-1" defaultValue={artifactDetails.discoveredAt}/>
+                                    <label htmlFor="discoveredAt"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Discovered At
+                                    </label>
+                                    <Input
+                                        id="discoveredAt"
+                                        {...register("discoveredAt")}
+                                        placeholder="e.g., 1799"
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.discoveredAt}
+                                    />
                                     {errors.discoveredAt &&
-                                        <p className="mt-1 text-xs text-red-600">{errors.discoveredAt.message}</p>}
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.discoveredAt.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="discoveredBy" className="block text-sm font-medium text-gray-700">Discovered
-                                        By</label>
-                                    <Input id="discoveredBy" {...register('discoveredBy')} className="mt-1"
-                                           defaultValue={artifactDetails.discoveredBy}/>
+                                    <label htmlFor="discoveredBy"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Discovered By
+                                    </label>
+                                    <Input
+                                        id="discoveredBy"
+                                        {...register("discoveredBy")}
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.discoveredBy}
+                                    />
                                     {errors.discoveredBy &&
-                                        <p className="mt-1 text-xs text-red-600">{errors.discoveredBy.message}</p>}
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.discoveredBy.message}</p>}
                                 </div>
                                 <div>
-                                    <label htmlFor="presentLocation"
-                                           className="block text-sm font-medium text-gray-700">Present
-                                        Location</label>
-                                    <Input id="presentLocation" {...register('presentLocation')} className="mt-1"
-                                           defaultValue={artifactDetails.presentLocation}/>
-                                    {errors.presentLocation &&
-                                        <p className="mt-1 text-xs text-red-600">{errors.presentLocation.message}</p>}
+                                    <label
+                                        htmlFor="presentLocation"
+                                        className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                    >
+                                        Present Location
+                                    </label>
+                                    <Input
+                                        id="presentLocation"
+                                        {...register("presentLocation")}
+                                        className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                        defaultValue={artifactDetails.presentLocation}
+                                    />
+                                    {errors.presentLocation && (
+                                        <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.presentLocation.message}</p>
+                                    )}
                                 </div>
                                 <div>
-                                    <label htmlFor={"artifactAdder"}
-                                           className="block text-sm font-medium text-gray-700">Artifact
-                                        Adder</label>
-                                    <Input id={"artifactAdder"} value={currentUser?.displayName || ""}
-                                           readOnly {...register("artifactAdder")} className="mt-1 bg-gray-100"/>
+                                    <label htmlFor="artifactAdder"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Artifact Adder
+                                    </label>
+                                    <Input
+                                        id="artifactAdder"
+                                        value={currentUser?.displayName || ""}
+                                        readOnly
+                                        {...register("artifactAdder")}
+                                        className="mt-1 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-gray-100"
+                                    />
                                 </div>
                                 <div>
-                                    <label htmlFor={"adderEmail"} className="block text-sm font-medium text-gray-700">Adder
-                                        Email</label>
-                                    <Input id="adderEmail" value={currentUser?.email || ""}
-                                           readOnly {...register("adderEmail")} className="mt-1 bg-gray-100"/>
+                                    <label htmlFor="adderEmail"
+                                           className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                                        Adder Email
+                                    </label>
+                                    <Input
+                                        id="adderEmail"
+                                        value={currentUser?.email || ""}
+                                        readOnly
+                                        {...register("adderEmail")}
+                                        className="mt-1 bg-gray-100 dark:bg-gray-600 text-gray-900 dark:text-gray-100"
+                                    />
                                 </div>
                             </div>
                             <div className="col-span-full">
-                                <label htmlFor="historicalContext" className="block text-sm font-medium text-gray-700">Historical
-                                    Context</label>
-                                <Textarea id="historicalContext" {...register('historicalContext')} className="mt-1"
-                                          defaultValue={artifactDetails.historicalContext}/>
-                                {errors.historicalContext &&
-                                    <p className="mt-1 text-xs text-red-600">{errors.historicalContext.message}</p>}
+                                <label
+                                    htmlFor="historicalContext"
+                                    className="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                                >
+                                    Historical Context
+                                </label>
+                                <Textarea
+                                    id="historicalContext"
+                                    {...register("historicalContext")}
+                                    className="mt-1 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                                    defaultValue={artifactDetails.historicalContext}
+                                />
+                                {errors.historicalContext && (
+                                    <p className="mt-1 text-xs text-red-600 dark:text-red-400">{errors.historicalContext.message}</p>
+                                )}
                             </div>
                             <div className="col-span-full">
-                                <Button type="submit" className="w-full bg-amber-600 hover:bg-amber-700 text-white"
-                                        disabled={isLocalLoading}>
-                                    {isLocalLoading ? 'Updating Artifact...' : 'Update Artifact'}
+                                <Button
+                                    type="submit"
+                                    className="w-full bg-amber-600 hover:bg-amber-700 text-white dark:bg-amber-700 dark:hover:bg-amber-800"
+                                    disabled={isLocalLoading}
+                                >
+                                    {isLocalLoading ? "Updating Artifact..." : "Update Artifact"}
                                 </Button>
                             </div>
                         </form>
