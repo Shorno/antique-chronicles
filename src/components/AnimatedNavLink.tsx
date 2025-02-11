@@ -23,7 +23,7 @@ export default function AnimatedNavLink({to, children} : AnimatedNavLinkProps) {
             >
                 {children}
                 <motion.div
-                    className="absolute -bottom-1 left-0 h-0.5 w-full bg-white origin-left"
+                    className="absolute -bottom-1 left-0 h-0.5 w-full bg-gray-900 dark:bg-white origin-left"
                     initial={{scaleX: isActive ? 1 : 0}}
                     animate={{scaleX: isHovered || isActive ? 1 : 0}}
                     transition={{duration: 0.3, ease: "easeInOut"}}
