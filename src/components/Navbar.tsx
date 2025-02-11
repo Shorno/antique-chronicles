@@ -8,6 +8,7 @@ import AuthLinks, {AuthContent} from "@/components/AuthLinks.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import useAuthStore from "@/store/authStore.ts";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.tsx";
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
 const navLinks = [
     {title: 'Home', href: '/'},
@@ -51,6 +52,7 @@ export default function Navbar() {
 
                     ))}
                     <AuthLinks/>
+                    <ModeToggle/>
                 </div>
                 <motion.div className="lg:hidden  relative">
                     <div className={"flex gap-8 justify-center items-center"}>
