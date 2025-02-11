@@ -28,7 +28,7 @@ export default function HomeCarousel() {
                     {images.map((src, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 lg:basis-full">
                             <div className="lg:p-40 p-1">
-                                <Card className="bg-gray-800 border-gray-700 rounded-sm">
+                                <Card className="bg-gray-300 dark:bg-gray-800  border-gray-200 dark:border-gray-700 rounded-sm">
                                     <CardContent
                                         className="flex aspect-[16/9] items-center justify-center lg:p-20 p-4 overflow-hidden">
                                         <motion.img

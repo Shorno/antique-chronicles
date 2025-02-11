@@ -5,7 +5,6 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from "@/components/ui/carousel"
-import { ChevronRight } from 'lucide-react'
 import {Link} from "react-router";
 import Egypt from "../assets/mummy_mask-teaser.webp"
 import Animals from "../assets/southwark cat (1).webp"
@@ -49,17 +48,10 @@ const categories: Category[] = [
 
 export function ExploreCollection() {
     return (
-        <section className="bg-gray-900 py-16">
+        <section className="bg-stone-100 dark:bg-gray-900 py-16 transition-colors duration-300">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-2xl md:text-4xl font-bold text-white">Explore the collection</h2>
-                    <Link
-                        to="/collection"
-                        className="flex items-center text-gray-300 hover:text-white transition-colors"
-                    >
-                        See all
-                        <ChevronRight className="ml-1 h-4 w-4" />
-                    </Link>
+                    <h2 className="text-2xl md:text-4xl font-bold">Explore the collection</h2>
                 </div>
 
                 <Carousel
@@ -74,7 +66,7 @@ export function ExploreCollection() {
                             <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                                 <Link target={"_blank"} to={category.link}>
                                     <div className="relative group overflow-hidden">
-                                        <div className="aspect-[3/4] bg-gray-800">
+                                        <div className="aspect-[3/4] dark:bg-gray-800">
                                             <img
                                                 src={category.image}
                                                 alt={category.title}

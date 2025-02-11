@@ -53,17 +53,17 @@ const accentColors = {
 
 export function ExhibitionsAndEvents() {
     return (
-        <section className="bg-gray-900 py-16">
+        <section className="bg-stone-100 dark:bg-gray-900 py-16 transition-colors duration-300">
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center mb-12">
-                    <h2 className="text-2xl     md:text-4xl font-bold text-white">Global exhibitions and events</h2>
+                    <h2 className="text-2xl md:text-4xl font-bold">Global exhibitions and events</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {exhibitions.map((exhibition, index) => (
                         <Card
                             key={index}
-                            className="bg-gray-800  rounded-md border-gray-700 overflow-hidden group"
+                            className=" dark:bg-gray-800 rounded-md dark:border-gray-700 overflow-hidden group"
                         >
                             <CardContent className="p-0">
                                 <div className="relative">
@@ -77,12 +77,12 @@ export function ExhibitionsAndEvents() {
                                 </div>
                                 <div className="p-6">
                                     <div className="mb-4">
-                                        <p className="text-sm text-gray-400 mb-1">{exhibition.type}</p>
-                                        <h3 className={`text-2xl  font-bold mb-1 text-white`}>
+                                        <p className="text-sm mb-1">{exhibition.type}</p>
+                                        <h3 className={`text-2xl  font-bold mb-1`}>
                                             {exhibition.title}
                                         </h3>
                                     </div>
-                                    <p className="text-gray-300">
+                                    <p>
                                         {exhibition.startDate} – {exhibition.endDate}
                                     </p>
                                 </div>
