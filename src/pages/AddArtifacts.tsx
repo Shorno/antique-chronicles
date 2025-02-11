@@ -48,8 +48,9 @@ export default function AddArtifact() {
 
 
     return (
-        <div className="min-h-screen mt-20 sm:mt-32 bg-stone-100 dark:bg-stone-900 py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto bg-white dark:bg-stone-800 shadow-md rounded-sm overflow-hidden">
+        <div
+            className="min-h-screen mt-20 sm:mt-32 bg-stone-100 dark:bg-gray-900 py-12 px-4 sm:px-6 lg:px-8 transition-colors duration-300">
+            <div className="max-w-4xl mx-auto bg-white dark:bg-gray-800 shadow-md rounded-sm overflow-hidden">
                 <div className="px-6 py-8">
                     <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-gray-100 mb-8">Add New
                         Artifact</h2>
