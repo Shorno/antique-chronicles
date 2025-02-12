@@ -55,7 +55,7 @@ export default function HistoricalContextTimeline() {
     };
 
     return (
-        <section className="min-h-screen  bg-gradient-to-b from-stone-100 to-stone-200 dark:from-gray-900 dark:to-gray-800">
+        <section className=" bg-gradient-to-b from-stone-100 to-stone-200 py-10 dark:from-gray-900 dark:to-gray-800">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Section Header */}
                 <div className="text-center mb-16">
