@@ -1,26 +1,33 @@
 import AnimatedNavLink from "@/components/AnimatedNavLink.tsx";
-import { Link } from "react-router";
-import { useEffect, useState } from "react";
-import { ChevronRight, Menu, UserIcon, X } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { Button } from "@/components/ui/button.tsx";
-import AuthLinks, { AuthContent } from "@/components/AuthLinks.tsx";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar.tsx";
+import {Link} from "react-router";
+import {useEffect, useState} from "react";
+import {ChevronRight, Menu, UserIcon, X} from "lucide-react";
+import {motion, AnimatePresence} from "motion/react";
+import {Button} from "@/components/ui/button.tsx";
+import AuthLinks, {AuthContent} from "@/components/AuthLinks.tsx";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import useAuthStore from "@/store/authStore.ts";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover.tsx";
-import { ModeToggle } from "@/components/mode-toggle.tsx";
+import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover.tsx";
+import {ModeToggle} from "@/components/mode-toggle.tsx";
 
-const navLinks = [
-    { title: 'Home', href: '/' },
-    { title: 'All Artifacts', href: '/artifacts' },
-    { title: 'Add Artifacts', href: '/add-artifacts' },
-    { title: 'My Artifacts', href: '/my-artifacts' },
-    { title: 'Liked Artifacts', href: '/liked-artifacts' },
+
+const publicLinks = [
+    {title: 'Home', href: '/'},
+    {title: 'All Artifacts', href: '/artifacts'},
+]
+
+const userLinks = [
+    {title: 'Home', href: '/'},
+    {title: 'All Artifacts', href: '/artifacts'},
+    {title: 'Add Artifacts', href: '/add-artifacts'},
+    {title: 'My Artifacts', href: '/my-artifacts'},
+    {title: 'Liked Artifacts', href: '/liked-artifacts'},
 ];
 
 export default function Navbar() {
-    const { authLoading, currentUser, logout } = useAuthStore();
+    const {authLoading, currentUser, logout} = useAuthStore();
     const [isOpen, setIsOpen] = useState(false);
+    const navLinks = currentUser ? userLinks : publicLinks
 
     useEffect(() => {
         if (isOpen) {
@@ -31,7 +38,8 @@ export default function Navbar() {
     }, [isOpen]);
 
     return (
-        <div className="bg-white dark:bg-gray-900 fixed z-50 p-4 md:p-8 w-full top-0 border-b border-b-gray-300 dark:border-b-gray-700">
+        <div
+            className="bg-white dark:bg-gray-900 fixed z-50 p-4 md:p-8 w-full top-0 border-b border-b-gray-300 dark:border-b-gray-700">
             <nav className="mx-auto container flex justify-between items-center text-gray-900 dark:text-white">
                 <Link
                     to="/"
@@ -50,15 +58,15 @@ export default function Navbar() {
                             {link.title}
                         </AnimatedNavLink>
                     ))}
-                    <AuthLinks />
-                    <ModeToggle />
+                    <AuthLinks/>
+                    <ModeToggle/>
                 </div>
                 <motion.div className="lg:hidden relative">
                     <div className="flex gap-8 justify-center items-center">
                         {authLoading ? (
                             <Avatar className="size-8">
                                 <AvatarFallback className="bg-gray-300 dark:bg-gray-700">
-                                    <UserIcon className="text-gray-900 dark:text-white" />
+                                    <UserIcon className="text-gray-900 dark:text-white"/>
                                 </AvatarFallback>
                             </Avatar>
                         ) : currentUser && (
@@ -70,12 +78,12 @@ export default function Navbar() {
                                             alt={currentUser?.displayName || undefined}
                                         />
                                         <AvatarFallback className="bg-gray-300 dark:bg-gray-700">
-                                            <UserIcon className="text-gray-900 dark:text-white" />
+                                            <UserIcon className="text-gray-900 dark:text-white"/>
                                         </AvatarFallback>
                                     </Avatar>
                                 </PopoverTrigger>
                                 <PopoverContent className="p-0 border-none w-max">
-                                    <AuthContent currentUser={currentUser!} logout={logout} />
+                                    <AuthContent currentUser={currentUser!} logout={logout}/>
                                 </PopoverContent>
                             </Popover>
                         )}
@@ -84,16 +92,16 @@ export default function Navbar() {
                             {isOpen ? (
                                 <motion.div
                                     key="close"
-                                    initial={{ opacity: 0, rotate: -90 }}
-                                    animate={{ opacity: 1, rotate: 0 }}
-                                    exit={{ opacity: 0, rotate: 90 }}
-                                    transition={{ duration: 0.5, ease: "easeInOut" }}
+                                    initial={{opacity: 0, rotate: -90}}
+                                    animate={{opacity: 1, rotate: 0}}
+                                    exit={{opacity: 0, rotate: 90}}
+                                    transition={{duration: 0.5, ease: "easeInOut"}}
                                 >
-                                    <X onClick={() => setIsOpen(false)} />
+                                    <X onClick={() => setIsOpen(false)}/>
                                 </motion.div>
                             ) : (
-                                <motion.div key="menu" transition={{ duration: 0.5, ease: "easeInOut" }}>
-                                    <Menu onClick={() => setIsOpen(true)} />
+                                <motion.div key="menu" transition={{duration: 0.5, ease: "easeInOut"}}>
+                                    <Menu onClick={() => setIsOpen(true)}/>
                                 </motion.div>
                             )}
                         </AnimatePresence>
@@ -102,10 +110,10 @@ export default function Navbar() {
                 <AnimatePresence>
                     {isOpen && (
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
+                            initial={{opacity: 0}}
+                            animate={{opacity: 1}}
+                            exit={{opacity: 0}}
+                            transition={{duration: 0.2}}
                             className="lg:hidden fixed inset-0 bg-white dark:bg-gray-900 border-t border-t-gray-300 dark:border-t-gray-700 mt-[97px] md:mt-32 z-[60]"
                         >
                             <motion.div
@@ -115,10 +123,10 @@ export default function Navbar() {
                                 exit="closed"
                                 variants={{
                                     open: {
-                                        transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+                                        transition: {staggerChildren: 0.07, delayChildren: 0.2},
                                     },
                                     closed: {
-                                        transition: { staggerChildren: 0.05, staggerDirection: -1 },
+                                        transition: {staggerChildren: 0.05, staggerDirection: -1},
                                     },
                                 }}
                             >
@@ -131,12 +139,12 @@ export default function Navbar() {
                                                 open: {
                                                     y: 0,
                                                     opacity: 1,
-                                                    transition: { y: { stiffness: 1000, velocity: -100 } },
+                                                    transition: {y: {stiffness: 1000, velocity: -100}},
                                                 },
                                                 closed: {
                                                     y: 50,
                                                     opacity: 0,
-                                                    transition: { y: { stiffness: 1000 } },
+                                                    transition: {y: {stiffness: 1000}},
                                                 },
                                             }}
                                             className="border-b border-neutral-800"
@@ -147,7 +155,7 @@ export default function Navbar() {
                                                 onClick={() => setIsOpen(false)}
                                             >
                                                 <span className="text-lg">{item.title}</span>
-                                                <ChevronRight className="text-gray-400 dark:text-gray-300" size={20} />
+                                                <ChevronRight className="text-gray-400 dark:text-gray-300" size={20}/>
                                             </Link>
                                         </motion.div>
                                     ))}
@@ -159,12 +167,12 @@ export default function Navbar() {
                                         open: {
                                             y: 0,
                                             opacity: 1,
-                                            transition: { y: { stiffness: 1000, velocity: -100 } },
+                                            transition: {y: {stiffness: 1000, velocity: -100}},
                                         },
                                         closed: {
                                             y: 50,
                                             opacity: 0,
-                                            transition: { y: { stiffness: 1000 } },
+                                            transition: {y: {stiffness: 1000}},
                                         },
                                     }}
                                 >
